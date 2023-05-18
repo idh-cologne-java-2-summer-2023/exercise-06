@@ -2,16 +2,107 @@ package idh.java;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.Iterator;
 
-public class Hanoi {
+public class Hanoi<T> extends MyLinkedList<T> {
+	
+	 MyLinkedList<Integer> left = new MyLinkedList<Integer>();
+	 MyLinkedList<Integer> middle = new MyLinkedList<Integer>();
+	 MyLinkedList<Integer> right = new MyLinkedList<Integer>();
 
 	public Hanoi() {
-		// TODO: Implement
+//		left.add(10);
+//		middle.add(10);
+//		right.add(10);
+		 for(int i = 9; i >= 1; i--) {
+			 left.add(i);
+		 }
+		/*left.add(2);
+		left.add(5);
+		left.add(3);
+		left.add(4);
+		left.add(10);
+		middle.add(3);
+		System.out.println(left.getLast());*/
 	}
 	
 	private void movePiece(char from, char to) {
-		// TODO: Implement
+		MyLinkedList<Integer> source;
+		MyLinkedList<Integer> target;
+
+		if(from == to) {
+			System.out.println("Sie müssen zwei unterschiedliche Stäbe angeben.");
+			return;
+		}
+		
+		 if (from == 'l') {
+		        source = left;
+		    } 
+		 else if (from == 'm') {
+		        source = middle;
+		    } 
+		 else if (from == 'r') {
+		        source = right;
+		    } 
+		 else{
+		    	System.out.println("Der eingegebene Stab existiert nicht.");
+		    	return;
+		    }
+
+		 if (to == 'l') {
+		        target = left;
+		    } 
+		 else if (to == 'm') {
+		        target = middle;
+		    } 
+		 else if (to == 'r') {
+		        target = right;
+		    } 
+		 else{
+		    	System.out.println("Der eingegebene Stab existiert nicht.");
+		        return;
+		    }
+		 
+		  if(!source.isEmpty() && (target.isEmpty() || source.getLast() <= target.getLast())) {
+			 if(to == 'l') {
+				 left.add(source.getLast());
+			 }
+			 else if(to == 'm') {
+				 middle.add(source.getLast());
+			 }
+			 else if(to == 'r') {
+				 right.add(source.getLast());
+			 }
+			 
+			 if(from == 'l') {
+				 if(left.size() == 1) {
+					 left.clear();
+				 }
+				 else {
+				 left.remove(left.getLast());
+				 }
+			 }
+			 else if(from == 'm') {
+				 if(middle.size() == 1) {
+					 middle.clear();
+				 }
+				 else {
+				 middle.remove(middle.getLast());
+				 }
+			 }
+			 else if(from == 'r') {
+				 if(right.size() == 1) {
+					 right.clear();
+				 }
+				 else {
+				 right.remove(right.getLast());
+				 }
+			 }
+		 }
+		  else {
+		        System.out.println("Die zu bewegende Scheibe darf nicht größer sein als die auf die sie draufgelegt wird.");
+		  }
 	}
 	
 	public void run() {
@@ -34,18 +125,15 @@ public class Hanoi {
 	}
 	
 	private Iterator<Integer> getLeftDescendingIterator() {
-		// TODO: Implement
-		return null;
+		return left.iterator();
 
 	}
 	private Iterator<Integer> getMiddleDescendingIterator() {
-		// TODO: Implement
-		return null;
+		return middle.iterator();
 
 	}
 	private Iterator<Integer> getRightDescendingIterator() {
-		// TODO: Implement
-		return null;
+		return right.iterator();
 	}
 	
 	public String toString() {
