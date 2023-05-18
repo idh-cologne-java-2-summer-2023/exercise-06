@@ -3,22 +3,58 @@ package idh.java;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.Iterator;
+import java.util.Stack;
 
 public class Hanoi {
-
+	
+	private Stack<Integer> sLeft = new Stack<>();
+	private Stack<Integer> sMid = new Stack<>();
+	private Stack<Integer> sRight = new Stack<>();
+	
+	
 	public Hanoi() {
-		// TODO: Implement
+		for (int i = 9; i > 0; i--) {
+			sLeft.push(i);
+		}
 	}
 	
+	private void execute(Stack<Integer> source, Stack<Integer> target) {
+		if (!source.empty() && ((!target.empty() && target.lastElement() > source.lastElement()) || target.empty())) {
+			int item = source.pop();
+			target.push(item);
+		}
+	}
+
 	private void movePiece(char from, char to) {
-		// TODO: Implement
+		switch (from) {
+		case 'l':
+			if (to == 'm')
+				execute(sLeft, sMid);
+			else execute(sLeft, sRight);
+			break;
+		case 'm':
+			if (to == 'r')
+				execute(sMid, sRight);
+			else execute(sMid, sLeft);
+			break;
+		case 'r':
+			if (to == 'l')
+				execute(sRight, sLeft);
+			else execute(sRight, sMid);
+			break;
+		}
 	}
 	
+
 	public void run() {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		while (true) {
 			try {
 				System.out.println(this);
+				if (sLeft.empty() && sMid.empty()) {
+					System.out.println("Congrats, you nailed it!");
+					System.exit(0);
+				}
 				System.out.print("Enter source and target stick (will move top piece):");
 				String s = br.readLine();
 				if (s.matches("^([lmr])([lmr])$")) {
@@ -33,24 +69,23 @@ public class Hanoi {
 		}
 	}
 	
+	// getters
 	private Iterator<Integer> getLeftDescendingIterator() {
-		// TODO: Implement
-		return null;
+		return sLeft.iterator();
 
 	}
 	private Iterator<Integer> getMiddleDescendingIterator() {
-		// TODO: Implement
-		return null;
+		return sMid.iterator();
 
 	}
 	private Iterator<Integer> getRightDescendingIterator() {
-		// TODO: Implement
-		return null;
+		return sRight.iterator();
 	}
+	
 	
 	public String toString() {
 		StringBuilder b = new StringBuilder();
-		b.append("  |\n l|");
+		b.append("\n  |\n l|");
 		Iterator<Integer> iter;
 		iter = this.getLeftDescendingIterator();
 		while(iter.hasNext()) {
@@ -72,6 +107,7 @@ public class Hanoi {
 		b.append("\n  |");
 		return b.toString();
 	}
+	
 	
 	public static void main(String[] args) {
 		Hanoi hanoi = new Hanoi();
