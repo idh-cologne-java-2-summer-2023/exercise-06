@@ -26,6 +26,9 @@ public class Hanoi {
 	}
 	
 	private void movePiece(char from, char to) {
+		if(from == to) {
+			System.out.println("Sie müssen zwei unterschiedliche Tower eingeben.");
+		}
 		// TODO: Implement
 		if(from == 'l') {
 			if(to == 'm') {
