@@ -3,7 +3,9 @@ package idh.java;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.HashSet;
 import java.util.Iterator;
+import java.util.Set;
 import java.util.StringTokenizer;
 
 public class Document implements Iterable<String> {
@@ -34,11 +36,13 @@ public class Document implements Iterable<String> {
 	public static final void main(String[] args) throws IOException {
 		Document d = Document.readFromFile(new File("data/dracula.txt"));
 		int i = 0;
+		HashSet<String> ttrset = new HashSet<String>();
 		for (String token : d) {
-			System.out.println(i++ + ": " + token + " ");
-			if (i > 100)
-				break;
+			System.out.println(i++ + ": " + token + " ");		
+			ttrset.add(token);
 		}
+		System.out.println(ttrset);
+		System.out.println(ttr(i-1, ttrset));
 	}
 
 	@Override
@@ -58,6 +62,18 @@ public class Document implements Iterable<String> {
 			}
 			
 		};
+	}
+	
+	public static double ttr(double amount, Set<String> set) {
+		System.out.println(amount);
+		int i = 0;
+		for (String s : set) {
+			i++;
+		}
+		System.out.println("test " + i);
+		double ttr = i/amount;
+		
+		return ttr;
 	}
 	
 	

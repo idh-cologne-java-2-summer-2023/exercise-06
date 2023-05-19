@@ -4,7 +4,6 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.ArrayDeque;
 import java.util.Collection;
-import java.util.Deque;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -31,21 +30,54 @@ public class Hanoi {
 		if(from == 'l') {
 			if(to == 'm') {
 				int i = tower1.remove();
-				tower2.add(i);
+				try {
+				if(i < tower2.element()) {
+					tower2.add(i);
+				}else {
+					System.out.println("Dieses Element ist größer als das oberste Element dieses Towers");
+				}
+				}catch(Exception e){
+					tower2.add(i);
+				}
 				
 			}else if (to == 'r'){
 				int i = tower1.remove();
-				tower3.add(i);
+				try {
+				if(i < tower3.element()) {
+					tower3.add(i);
+				}else {
+					System.out.println("Dieses Element ist größer als das oberste Element dieses Towers");
+				}
+				}catch(Exception e){
+					tower3.add(i);
+				}
 			}else {
 				System.out.println("Keine gültige Eingabe!");
 			}
 		}else if(from == 'm'){
+			
 			if(to == 'l') {
 				int i = tower2.remove();
-				tower1.add(i);
+				try {
+					if(i < tower1.element()) {
+						tower1.add(i);
+					}else {
+						System.out.println("Dieses Element ist größer als das oberste Element dieses Towers");
+					}
+					}catch(Exception e){
+						tower1.add(i);
+					}
 			}else if (to == 'r'){
 				int i = tower2.remove();
-				tower3.add(i);
+				try {
+					if(i < tower3.element()) {
+						tower3.add(i);
+					}else {
+						System.out.println("Dieses Element ist größer als das oberste Element dieses Towers");
+					}
+					}catch(Exception e){
+						tower3.add(i);
+					}
 			}else {
 				System.out.println("Keine gültige Eingabe!");
 			}
@@ -53,10 +85,26 @@ public class Hanoi {
 		}else if (from == 'r') {
 			if(to == 'l') {
 				int i = tower3.remove();
-				tower1.add(i);
+				try {
+					if(i < tower1.element()) {
+						tower1.add(i);
+					}else {
+						System.out.println("Dieses Element ist größer als das oberste Element dieses Towers");
+					}
+					}catch(Exception e){
+						tower1.add(i);
+					}
 			}else if (to == 'm') {
 				int i = tower3.remove();
-				tower2.add(i);
+				try {
+					if(i < tower2.element()) {
+						tower2.add(i);
+					}else {
+						System.out.println("Dieses Element ist größer als das oberste Element dieses Towers");
+					}
+					}catch(Exception e){
+						tower2.add(i);
+					}
 			}else {
 				System.out.println("Keine gültige Eingabe!");
 			}
@@ -67,7 +115,7 @@ public class Hanoi {
         
 	}
 	
-	public int[] last(Collection<Integer>  c, Collection<Integer>  c1, Collection<Integer> c2) {
+	public int[] reverse(Collection<Integer>  c, Collection<Integer>  c1, Collection<Integer> c2) {
 		Object[] testArray = c.toArray();
 		Object[] testArray2 = c1.toArray();
 		Object[] testArray3 = c2.toArray();
@@ -119,17 +167,17 @@ public class Hanoi {
 	
 	private Iterator<Integer> getLeftDescendingIterator() {
 		// TODO: Implement
-		return list1.iterator();
+		return tower1.iterator();
 
 	}
 	private Iterator<Integer> getMiddleDescendingIterator() {
 		// TODO: Implement
-		return list2.iterator();
+		return tower2.iterator();
 
 	}
 	private Iterator<Integer> getRightDescendingIterator() {
 		// TODO: Implement
-		return list3.iterator();
+		return tower3.iterator();
 	}
 	
 	public String toString() {
@@ -159,7 +207,7 @@ public class Hanoi {
 	
 	public static void main(String[] args) {
 		Hanoi hanoi = new Hanoi();
-		int[] test =  hanoi.last(tower1, tower2, tower3);	
+//		int[] test =  hanoi.last(tower1, tower2, tower3);	
 		hanoi.run();
 	}
 
