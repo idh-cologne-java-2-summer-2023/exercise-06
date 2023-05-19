@@ -28,6 +28,7 @@ public class MyLinkedList<T> implements List<T> {
 		return cr;
 	}
 	
+	
 	public T getLast() {
 	    ListElement lastElement = last();
 	    

@@ -12,19 +12,9 @@ public class Hanoi<T> extends MyLinkedList<T> {
 	 MyLinkedList<Integer> right = new MyLinkedList<Integer>();
 
 	public Hanoi() {
-//		left.add(10);
-//		middle.add(10);
-//		right.add(10);
 		 for(int i = 9; i >= 1; i--) {
 			 left.add(i);
 		 }
-		/*left.add(2);
-		left.add(5);
-		left.add(3);
-		left.add(4);
-		left.add(10);
-		middle.add(3);
-		System.out.println(left.getLast());*/
 	}
 	
 	private void movePiece(char from, char to) {
