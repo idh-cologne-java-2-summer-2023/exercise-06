@@ -8,6 +8,7 @@ import java.util.StringTokenizer;
 
 public class Document implements Iterable<String> {
 	String documentText;
+	static MyLinkedList<String> unique = new MyLinkedList<String>();
 
 	public static Document readFromFile(File f) throws IOException {
 		FileReader fileReader = new FileReader(f);
@@ -23,6 +24,18 @@ public class Document implements Iterable<String> {
 		return doc;
 	}
 	
+	public static double ttr(Document doc) throws IOException {
+		int i = 0;
+		for(String token : doc) {
+			if(!unique.contains(token)) {
+				unique.add(token);
+			}
+			i++;
+		}
+		
+		return (double)unique.size()/(double) i;
+	}
+	
 	public String getDocumentText() {
 		return documentText;
 	}
@@ -33,12 +46,13 @@ public class Document implements Iterable<String> {
 	
 	public static final void main(String[] args) throws IOException {
 		Document d = Document.readFromFile(new File("data/dracula.txt"));
-		int i = 0;
+		/*int i = 0;
 		for (String token : d) {
 			System.out.println(i++ + ": " + token + " ");
 			if (i > 100)
 				break;
-		}
+		}*/
+		System.out.println(ttr(d));
 	}
 
 	@Override
