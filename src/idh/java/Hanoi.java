@@ -4,11 +4,10 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.Iterator;
 import java.util.LinkedList;
-import java.util.Queue;
 import java.util.Stack;
 
 public class Hanoi {
-			
+				
 	Tower left;
 	Tower middle;
 	Tower right;
@@ -39,12 +38,55 @@ public class Hanoi {
 	}
 	
 	private void movePiece(char from, char to) {
-		
+		System.out.println("null");
+		if(getTower(to).stack.isEmpty()
+				|| getTower(from).stack.peek() < getTower(to).stack.peek()) {
+			System.out.println("eins");
+			getTower(to).stack.add(getTower(from).stack.pop());
+		} else System.out.println("Invalid Position.");
+		stackToList(getTower(to).stack, getTower(to).list);
+		stackToList(getTower(from).stack, getTower(from).list);
 	}
 	
-	private void listToStack(LinkedList<Integer> list, Stack<Integer> stack) {
+	private Tower getTower(char position) {
+		System.out.println("a");
+		if(position == left.position) {
+			System.out.println("l");
+			return left;
+		} else if(position == middle.position) {
+			System.out.println("m");
+			return middle;
+		} else if(position == right.position) {
+			return right;
+		} return null;
+	}
+	
+//	private static void movePiece(char from, char to) {
+//		System.out.println("null");
+//		for(int i = 0; i <= 3; i++) {
+//			System.out.println("a");
+//			if (from == towers[i].position) {
+//				System.out.println("eins");
+//				for(int ii = 0; ii <= 3; ii++) {
+//					if (towers[i].stack.peek() < towers[ii].stack.peek() 
+//							|| towers[ii].stack.peek() == null) {
+//						System.out.println("zwei");
+//						towers[ii].stack.add(towers[i].stack.pop());
+//					}
+//				}
+//			}
+//		}
+//	}
+	
+	private static void listToStack(LinkedList<Integer> list, Stack<Integer> stack) {
 		for(int i = list.size(); i > 0; i--) {
 			stack.add(list.get(i-1));
+		}
+	}
+	
+	private static void stackToList(Stack<Integer> stack, LinkedList<Integer> list) {
+		for(int i = 0; i < stack.size(); i++) {
+			list.set(i, stack.pop());
 		}
 	}
 	
@@ -135,9 +177,14 @@ public class Hanoi {
 		
 		System.out.println(hanoi.left.list);
 		System.out.println(hanoi.left.list.peek());
-		System.out.println(hanoi.left.list);
 		System.out.println(hanoi.left.stack);
-//		hanoi.printTowers();
+		System.out.println(hanoi.left.stack.peek());
+		stackToList(hanoi.left.stack, hanoi.left.list);
+		System.out.println(hanoi.left.list);
+		hanoi.printTowers();
+		hanoi.movePiece('l', 'm');
+		hanoi.printTowers();
+//		System.out.println(hanoi.getTower('m').stack);
 		
 //		hanoi.run();
 	}

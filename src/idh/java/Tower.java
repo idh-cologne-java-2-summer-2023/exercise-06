@@ -17,7 +17,11 @@ public class Tower {
 	
 	public void printTower() {
 		System.out.println(" |");
-		System.out.println(this.position + "|" + this.list);
+		System.out.print(this.position + "|"); 
+		for(int i = 0; i < this.list.size(); i++) {
+			System.out.print(this.list.get(i) + " ");	
+		}
+		System.out.println();
 	}
 
 }
