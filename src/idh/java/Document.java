@@ -1,9 +1,11 @@
 package idh.java;
 
-import java.io.File;
+import java.io.File;	
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.HashSet;
 import java.util.Iterator;
+import java.util.Set;
 import java.util.StringTokenizer;
 
 public class Document implements Iterable<String> {
@@ -39,6 +41,7 @@ public class Document implements Iterable<String> {
 			if (i > 100)
 				break;
 		}
+		System.out.println(d.ttr());
 	}
 
 	@Override
@@ -60,5 +63,17 @@ public class Document implements Iterable<String> {
 		};
 	}
 	
+	public double ttr() {
+		double counter=0;
+		Set<String> difWords = new HashSet<String>();
+		Iterator<String> iter = this.iterator();
+		while(iter.hasNext()) {
+			counter++;
+			difWords.add(iter.next());
+		}
+		System.out.println(counter);
+		System.out.println(difWords.size());
+		return difWords.size() / counter;
+	}
 	
 }
