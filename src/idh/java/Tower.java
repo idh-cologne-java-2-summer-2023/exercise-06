@@ -19,7 +19,9 @@ public class Tower {
 		System.out.println(" |");
 		System.out.print(this.position + "|"); 
 		for(int i = 0; i < this.list.size(); i++) {
+			if(this.list.get(i) != 0) {
 			System.out.print(this.list.get(i) + " ");	
+			}
 		}
 		System.out.println();
 	}
