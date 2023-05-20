@@ -1,17 +1,50 @@
 package idh.java;
 
-import java.io.BufferedReader;
+import java.io.BufferedReader;	
 import java.io.InputStreamReader;
 import java.util.Iterator;
+import java.util.ArrayDeque;
+import java.util.Deque;
 
 public class Hanoi {
+	Deque<Integer> l = new ArrayDeque<Integer>();
+	Deque<Integer> m = new ArrayDeque<Integer>();
+	Deque<Integer> r = new ArrayDeque<Integer>();
 
-	public Hanoi() {
-		// TODO: Implement
+	public Hanoi(int pieceAmount) {
+		if(pieceAmount < 1 )
+			pieceAmount = 1;
+		else if(pieceAmount > 9)
+			pieceAmount = 9;
+		
+		for(;pieceAmount>0; pieceAmount--) {
+			l.push(pieceAmount);
+		}
 	}
 	
 	private void movePiece(char from, char to) {
-		// TODO: Implement
+		Deque<Integer> popStack = whichStack(from);
+		Deque<Integer> pushStack = whichStack(to);
+		
+		if(pushStack.isEmpty() ||popStack.getFirst() < pushStack.getFirst())
+			pushStack.push(popStack.pop());
+		else
+			System.out.println("Move not possible, the moved piece is bigger than the top of the destination-stack.");
+	}
+	
+	private Deque<Integer> whichStack(char c) {
+		switch (c) {
+			case 'l': {
+				return this.l;
+			}
+			case 'm': {
+				return this.m;
+			}
+			case 'r': {
+				return this.r;
+			}
+		}
+		return null;
 	}
 	
 	public void run() {
@@ -28,24 +61,27 @@ public class Hanoi {
 				}
 			} catch (Exception e) {
 				System.out.println("Try again, something's not right.");
-				// e.printStackTrace();
+				// e.printDequeTrace();
 			} 
 		}
 	}
 	
+//	private Deque<Integer> reverseDeque(Deque<Integer> stack){
+//		Deque<Integer> temp = new ArrayDeque<Integer>();
+//		for(Integer i : stack) {
+//			temp.push(i);
+//		}
+//		return temp;
+//	}
+	
 	private Iterator<Integer> getLeftDescendingIterator() {
-		// TODO: Implement
-		return null;
-
+		return l.descendingIterator();
 	}
 	private Iterator<Integer> getMiddleDescendingIterator() {
-		// TODO: Implement
-		return null;
-
+		return m.descendingIterator();
 	}
 	private Iterator<Integer> getRightDescendingIterator() {
-		// TODO: Implement
-		return null;
+		return r.descendingIterator();
 	}
 	
 	public String toString() {
@@ -74,7 +110,7 @@ public class Hanoi {
 	}
 	
 	public static void main(String[] args) {
-		Hanoi hanoi = new Hanoi();
+		Hanoi hanoi = new Hanoi(9);
 		hanoi.run();
 	}
 
