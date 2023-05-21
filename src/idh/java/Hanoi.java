@@ -6,11 +6,15 @@ import java.util.LinkedList;
 import java.util.Stack;
 
 public class Hanoi {
-				
+
+// Umständlich gelöst aber funktioniert. toString() Methode sowie vorgegebene Iteratoren nicht genutzt.
+// Tower-Klasse repräsentiert die einzelnen Türme. Hanoi-Klasse kann somit theoretisch beliebig viele
+// Türme haben und auch Anzahl der Scheiben ist durch height modifizierbar.	
+	
 	Tower left;
 	Tower middle;
 	Tower right;
-	
+
 	int height;
 	
 	public Hanoi(int height) {
@@ -80,7 +84,7 @@ public class Hanoi {
 		while (true) {
 			this.printTowers();
 			try {
-				System.out.println(this);
+//				System.out.println(this);
 				System.out.print("Enter source and target stick (will move top piece):");
 				String s = br.readLine();
 				if (s.matches("^([lmr])([lmr])$")) {
@@ -90,7 +94,6 @@ public class Hanoi {
 				}
 			} catch (Exception e) {
 				System.out.println("Try again, something's not right.");
-				// e.printStackTrace();
 			} 
 		}
 	}
@@ -104,7 +107,7 @@ public class Hanoi {
 	
 	
 	public static void main(String[] args) {
-		Hanoi hanoi = new Hanoi(3);
+		Hanoi hanoi = new Hanoi(9);
 			
 		hanoi.run();
 	}
