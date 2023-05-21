@@ -2,16 +2,48 @@ package idh.java;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.util.ArrayDeque;
+import java.util.Deque;
 import java.util.Iterator;
 
 public class Hanoi {
 
+	private Deque<Integer> leftDeque = new ArrayDeque<Integer>();
+	private Deque<Integer> middleDeque = new ArrayDeque<Integer>();
+	private Deque<Integer> rightDeque = new ArrayDeque<Integer>();
+
 	public Hanoi() {
-		// TODO: Implement
+		for (int i = 9; i > 0 ; i--) {
+			leftDeque.push(i);
+		}
+	}
+
+	private Deque<Integer> originStack(char c) {
+		switch (c) {
+			case 'l': {
+				return this.leftDeque;
+			}
+			case 'm': {
+				return this.middleDeque;
+			}
+			case 'r': {
+				return this.rightDeque;
+			}
+			default: {
+				return null;
+			}
+		}
 	}
 	
 	private void movePiece(char from, char to) {
-		// TODO: Implement
+		Deque<Integer> fromDeque = originStack(from);
+		Deque<Integer> toDeque = originStack(to);
+
+		if (fromDeque.isEmpty() || !toDeque.isEmpty() && fromDeque.peek() > toDeque.peek()) {
+			System.out.println("Illegal move!");
+		} else {
+			toDeque.push(fromDeque.pop());
+		}
 	}
 	
 	public void run() {
@@ -34,18 +66,14 @@ public class Hanoi {
 	}
 	
 	private Iterator<Integer> getLeftDescendingIterator() {
-		// TODO: Implement
-		return null;
-
+		return this.leftDeque.descendingIterator();
 	}
 	private Iterator<Integer> getMiddleDescendingIterator() {
-		// TODO: Implement
-		return null;
+		return this.middleDeque.descendingIterator();
 
 	}
 	private Iterator<Integer> getRightDescendingIterator() {
-		// TODO: Implement
-		return null;
+		return this.rightDeque.descendingIterator();
 	}
 	
 	public String toString() {

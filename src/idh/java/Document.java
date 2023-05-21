@@ -3,6 +3,7 @@ package idh.java;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.StringTokenizer;
 
@@ -39,6 +40,7 @@ public class Document implements Iterable<String> {
 			if (i > 100)
 				break;
 		}
+		System.out.println(ttp(d));
 	}
 
 	@Override
@@ -60,5 +62,13 @@ public class Document implements Iterable<String> {
 		};
 	}
 	
-	
+	public static double ttp(Document d) {
+		double c = 0;
+		HashSet<String> words = new HashSet<String>();
+		for(String s : d) {
+			c++;
+			words.add(s);
+		}
+		return words.size() / c;
+	}
 }
