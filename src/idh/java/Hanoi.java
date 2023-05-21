@@ -3,16 +3,59 @@ package idh.java;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.Iterator;
+import java.util.Deque;
+import java.util.ArrayDeque;
 
-public class Hanoi {
 
-	public Hanoi() {
-		// TODO: Implement
-	}
+
+public class Hanoi  {
+	
+	private final int Capacity = 9;
+	
+	public Hanoi(int Capacity) {
+		
+		Capacity = this.Capacity;
+}
+	
+	
 	
 	private void movePiece(char from, char to) {
-		// TODO: Implement
+		
+		switch (from) {
+		
+		case 1:
+		from = 'l';
+		
+		switch (to) {
+		
+		case 10: 
+		to = 'm';
+		break;
+		
+		case 20:
+		to = 'l';
+		break;
+		
+		case 30:
+		to = 'r';
+		break;
+		
+		}
+		break;
+		
+		case 2:
+		from = 'm';
+		break;
+		
+		case 3:
+		from = 'r';
+		break;
+		
+		
 	}
+	}
+//couldn't figure out how to move from one deque to the other.
+		
 	
 	public void run() {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -20,10 +63,10 @@ public class Hanoi {
 			try {
 				System.out.println(this);
 				System.out.print("Enter source and target stick (will move top piece):");
-				String s = br.readLine();
-				if (s.matches("^([lmr])([lmr])$")) {
-					char source = s.charAt(0);
-					char target = s.charAt(1);
+				String userInput = br.readLine();
+				if (userInput.matches("^([lmr])([lmr])$")) {
+					char source = userInput.charAt(0);
+					char target = userInput.charAt(1);
 					movePiece(source, target);
 				}
 			} catch (Exception e) {
@@ -33,20 +76,94 @@ public class Hanoi {
 		}
 	}
 	
-	private Iterator<Integer> getLeftDescendingIterator() {
-		// TODO: Implement
-		return null;
-
-	}
+	
+	
+	
+	
+	public Iterator<Integer> getLeftDescendingIterator() {
+		
+		
+		Deque<Integer> stackL = new ArrayDeque<>();
+		stackL.add(9);
+		stackL.add(8);
+		stackL.add(7);
+		stackL.add(6);
+		stackL.add(5);
+		stackL.add(4);
+		stackL.add(3);
+		stackL.add(2);
+		stackL.add(1);
+		
+		
+		
+		return new Iterator() {
+			
+      
+			int start = 0;
+			
+			@Override
+			public boolean hasNext() {
+				return start < stackL.size();
+			}
+		
+			
+			public Integer hasPrevious() {
+				return stackL.pollFirst();
+			} 
+			
+			
+			@Override
+			public Integer next() {
+				return stackL.pollFirst();
+			}	
+		}; 
+	} 
+	
+	
 	private Iterator<Integer> getMiddleDescendingIterator() {
-		// TODO: Implement
-		return null;
+		
+		Deque<Integer> stackM = new ArrayDeque<>();
 
+		
+		return new Iterator() {
+			
+			int start = 0;
+			
+			@Override
+			public boolean hasNext() {
+				return start < stackM.size();
+			}
+
+			@Override
+			public Object next() {
+				return stackM.pollFirst();
+			}
+		}; 
 	}
+	
+	
+	
 	private Iterator<Integer> getRightDescendingIterator() {
-		// TODO: Implement
-		return null;
+		
+		Deque<Integer> stackR = new ArrayDeque<>();
+		
+		return new Iterator() {
+			
+			int start = 8;
+
+			@Override
+			public boolean hasNext() {
+				return start < stackR.size();
+			}
+
+			@Override
+			public Object next() {
+				return stackR.pollFirst();
+			}
+		}; 
 	}
+	
+	
 	
 	public String toString() {
 		StringBuilder b = new StringBuilder();
@@ -71,11 +188,14 @@ public class Hanoi {
 		}
 		b.append("\n  |");
 		return b.toString();
-	}
+	} 
 	
 	public static void main(String[] args) {
-		Hanoi hanoi = new Hanoi();
-		hanoi.run();
+		Hanoi hanoi = new Hanoi(9);
+		hanoi.run();  
+	
+		
+		
 	}
 
 }
