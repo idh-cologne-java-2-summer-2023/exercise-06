@@ -13,21 +13,112 @@ public class Hanoi {
 	Deque<Integer> towerRight = new LinkedList<Integer>();
 
 	public Hanoi() {
-		towerLeft.add(9);
-		towerLeft.add(8);
-		towerLeft.add(7);
-		towerLeft.add(6);
-		towerLeft.add(5);
-		towerLeft.add(4);
-		towerLeft.add(3);
-		towerLeft.add(2);
 		towerLeft.add(1);
+		towerLeft.add(2);
+		towerLeft.add(3);
+		towerLeft.add(4);
+		towerLeft.add(5);
+		towerLeft.add(6);
+		towerLeft.add(7);
+		towerLeft.add(8);
+		towerLeft.add(9);
 		
 	}
 	
 	private void movePiece(char from, char to) {
 		// TODO: Implement
+		int hold = 0;
 		
+		switch (from) {
+		case 'l':
+			hold = towerLeft.poll();
+			break;
+		case 'm':
+			hold = towerMiddle.poll();
+			break;
+		case 'r':
+			hold = towerRight.poll();
+			break;
+		default:
+			break;
+		}
+		
+		switch (to) {
+		case 'l':
+			if(towerLeft.peek() != null) {
+				if (hold < towerLeft.peek()) {
+					towerLeft.addFirst(hold);}
+				else {
+					System.out.println("Die Zahl darf nicht höher als die vorhandene sein.");
+				switch (from) {
+				case 'l':
+					towerLeft.addFirst(hold);
+					break;
+				case 'm':
+					towerMiddle.addFirst(hold);
+					break;
+				case 'r':
+					towerRight.addFirst(hold);
+					break;
+				default:
+					break;
+				}
+				}
+			}
+			else
+				towerLeft.addFirst(hold);
+			break;
+		case 'm':
+			if(towerMiddle.peek() != null) {
+				if (hold < towerMiddle.peek()) {
+					towerMiddle.addFirst(hold);}
+				else { 
+					System.out.println("Die Zahl darf nicht höher als die vorhandene sein.");
+					switch (from) {
+				case 'l':
+					towerLeft.addFirst(hold);
+					break;
+				case 'm':
+					towerMiddle.addFirst(hold);
+					break;
+				case 'r':
+					towerRight.addFirst(hold);
+					break;
+				default:
+					break;
+					}
+				}
+				}
+			else
+				towerMiddle.addFirst(hold);
+			break;
+		case 'r':
+			if(towerRight.peek() != null) {
+				if (hold < towerRight.peek()) {
+					towerRight.addFirst(hold);}
+				else {
+					System.out.println("Die Zahl darf nicht höher als die vorhandene sein.");
+				switch (from) {
+				case 'l':
+					towerLeft.addFirst(hold);
+					break;
+				case 'm':
+					towerMiddle.addFirst(hold);
+					break;
+				case 'r':
+					towerRight.addFirst(hold);
+					break;
+				default:
+					break;
+				}
+				}
+				}
+			else
+				towerRight.addFirst(hold);
+			break;
+		default:
+			break;
+		}
 	}
 	
 	public void run() {
@@ -51,17 +142,17 @@ public class Hanoi {
 	
 	private Iterator<Integer> getLeftDescendingIterator() {
 		// TODO: Implement
-		return null;
-
+		return towerLeft.descendingIterator();
 	}
+	
 	private Iterator<Integer> getMiddleDescendingIterator() {
 		// TODO: Implement
-		return null;
+		return towerMiddle.descendingIterator();
 
 	}
 	private Iterator<Integer> getRightDescendingIterator() {
 		// TODO: Implement
-		return null;
+		return towerRight.descendingIterator();
 	}
 	
 	public String toString() {
