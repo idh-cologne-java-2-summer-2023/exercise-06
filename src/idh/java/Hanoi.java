@@ -2,16 +2,32 @@ package idh.java;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.util.Deque;
 import java.util.Iterator;
+import java.util.LinkedList;
 
 public class Hanoi {
+	
+	Deque<Integer> towerLeft = new LinkedList<Integer>();
+	Deque<Integer> towerMiddle = new LinkedList<Integer>();
+	Deque<Integer> towerRight = new LinkedList<Integer>();
 
 	public Hanoi() {
-		// TODO: Implement
+		towerLeft.add(9);
+		towerLeft.add(8);
+		towerLeft.add(7);
+		towerLeft.add(6);
+		towerLeft.add(5);
+		towerLeft.add(4);
+		towerLeft.add(3);
+		towerLeft.add(2);
+		towerLeft.add(1);
+		
 	}
 	
 	private void movePiece(char from, char to) {
 		// TODO: Implement
+		
 	}
 	
 	public void run() {
