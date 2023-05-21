@@ -17,7 +17,7 @@ public class Document implements Iterable<String> {
 			b.append((char) ch);
 		}
 		fileReader.close();
-		Document doc = new Document();
+		Document doc = new Document(); //s
 		doc.documentText = b.toString();
 		
 		return doc;
