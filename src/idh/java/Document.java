@@ -1,6 +1,8 @@
 package idh.java;
 
 import java.io.File;
+import java.util.Set;
+import java.util.HashSet;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Iterator;
@@ -39,6 +41,7 @@ public class Document implements Iterable<String> {
 			if (i > 100)
 				break;
 		}
+		System.out.println(ttr(d));
 	}
 
 	@Override
@@ -58,7 +61,17 @@ public class Document implements Iterable<String> {
 			}
 			
 		};
-	}
 	
+	}
+	public static double ttr(Document d) {
+		Set<String> tokens = new HashSet<String>();
+		double i = 0;
+		for(String token : d) {
+			tokens.add(token);
+			i++;
+		}
+		double e = tokens.size() / i;
+		return e;
+	}
 	
 }

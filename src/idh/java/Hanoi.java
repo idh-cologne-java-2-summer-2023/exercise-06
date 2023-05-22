@@ -2,16 +2,42 @@ package idh.java;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.util.ArrayDeque;
 import java.util.Iterator;
 
 public class Hanoi {
 
+	static ArrayDeque<Integer> towerLeft = new ArrayDeque<Integer>();
+	static ArrayDeque<Integer> towerMiddle = new ArrayDeque<Integer>();
+	static ArrayDeque<Integer> towerRight = new ArrayDeque<Integer>();
+	
 	public Hanoi() {
-		// TODO: Implement
+		for(int i = 9; i >= 1; i--) {
+			towerLeft.add(i);
+		}
+	}
+	
+	private ArrayDeque<Integer> getTower(char t){
+		switch (t) {
+		default : return null;
+		case 'l' : return towerLeft;
+		case 'm' : return towerMiddle;
+		case 'r' : return towerRight;
+		}
 	}
 	
 	private void movePiece(char from, char to) {
-		// TODO: Implement
+		ArrayDeque<Integer> sourceTower = getTower(from);
+		ArrayDeque<Integer> targetTower = getTower(to);
+		if (sourceTower.isEmpty()) {
+			System.out.println("This tower is empty. Try another one.");
+		}
+		else if (!targetTower.isEmpty() && sourceTower.peekFirst() > targetTower.peekFirst()) {
+			System.out.println("Cannot stack bigger piece");
+		}
+		else {
+			targetTower.add(sourceTower.removeLast());
+		}
 	}
 	
 	public void run() {
@@ -34,18 +60,15 @@ public class Hanoi {
 	}
 	
 	private Iterator<Integer> getLeftDescendingIterator() {
-		// TODO: Implement
-		return null;
+		return towerLeft.iterator();
 
 	}
 	private Iterator<Integer> getMiddleDescendingIterator() {
-		// TODO: Implement
-		return null;
+		return towerMiddle.iterator();
 
 	}
 	private Iterator<Integer> getRightDescendingIterator() {
-		// TODO: Implement
-		return null;
+		return towerRight.iterator();
 	}
 	
 	public String toString() {
