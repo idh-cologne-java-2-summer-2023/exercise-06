@@ -43,6 +43,7 @@ public class Document implements Iterable<String> {
         }
 
         double ttr = d.ttr();
+        //print out TTR
         System.out.println("TTR: " + ttr);
     }
 
