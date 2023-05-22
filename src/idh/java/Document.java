@@ -5,6 +5,8 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Iterator;
 import java.util.StringTokenizer;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Document implements Iterable<String> {
 	String documentText;
@@ -29,6 +31,18 @@ public class Document implements Iterable<String> {
 
 	public void setDocumentText(String documentText) {
 		this.documentText = documentText;
+	}
+	
+	
+	public static double ttr(Document d) {
+		double numberOfTokens = 0;
+		Set<String> typeSet = new HashSet<String>();
+		
+		for (String token : d) {
+			typeSet.add(token);
+			numberOfTokens++;
+		}
+		return numberOfTokens;
 	}
 	
 	public static final void main(String[] args) throws IOException {
@@ -59,6 +73,5 @@ public class Document implements Iterable<String> {
 			
 		};
 	}
-	
-	
+
 }
