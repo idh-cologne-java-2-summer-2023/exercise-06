@@ -3,7 +3,9 @@ package idh.java;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.HashSet;
 import java.util.Iterator;
+import java.util.Set;
 import java.util.StringTokenizer;
 
 public class Document implements Iterable<String> {
@@ -39,6 +41,11 @@ public class Document implements Iterable<String> {
 			if (i > 100)
 				break;
 		}
+		
+		System.out.println("");
+		
+		System.out.println("Die TTR des Texts liegt bei: " + ttr("data/dracula.txt"));
+		
 	}
 
 	@Override
@@ -60,5 +67,24 @@ public class Document implements Iterable<String> {
 		};
 	}
 	
+	public static double ttr(String documentText) throws IOException {
+		
+		Set <String> types = new HashSet<String>();
+		
+		Document d = Document.readFromFile(new File(documentText));
+		int i = 0;
+		for (String token : d) {
+			i++;
+			types.add(token);
+		}
+		
+		System.out.println("Anzahl der Types: " + types.size());
+		System.out.println("Anzahl der Tokens insgesamt: " + i);
+		
+		double typeTokenRelation = (double)types.size() / i;
+		
+		
+		return typeTokenRelation;
+	}
 	
 }
