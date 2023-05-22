@@ -2,16 +2,88 @@ package idh.java;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.util.ArrayDeque;
+import java.util.Deque;
 import java.util.Iterator;
 
 public class Hanoi {
-
+	Deque<Integer> linkerTurm = new ArrayDeque<>();
+	Deque<Integer> mittlererTurm = new ArrayDeque<>();
+	Deque<Integer> rechterTurm = new ArrayDeque<>();
+	
 	public Hanoi() {
-		// TODO: Implement
+		for (int i = 1; i < 10; i++) {
+			linkerTurm.add(i);
+		}
 	}
 	
 	private void movePiece(char from, char to) {
-		// TODO: Implement
+		int obersteLinks = linkerTurm.peekFirst();							//Ausgangsscheibe
+		int obersteMitte;
+		int obersteRechts;
+		
+		 switch (from) {
+	        case 'l':
+	                switch (to) {
+	                    case 'm':
+	                    	if (mittlererTurm.isEmpty() || mittlererTurm.peekLast() > obersteLinks) {
+	                    		mittlererTurm.addFirst(obersteLinks);
+	                    		linkerTurm.remove(obersteLinks);
+	                    	}
+	                        break;
+	                    case 'r':
+	                    	if (rechterTurm.isEmpty() || rechterTurm.peekLast() > obersteLinks)
+	                    		rechterTurm.addFirst(obersteLinks);
+	                    		linkerTurm.remove(obersteLinks);
+	                        break; 
+	                     }
+	         break;
+         
+        case 'm':
+              	if (!mittlererTurm.isEmpty()) {
+              		obersteMitte = mittlererTurm.peekFirst();
+	        		switch (to) {
+		                 case 'l':
+		                   	if (linkerTurm.isEmpty() || linkerTurm.peekLast() > obersteMitte){
+		                        linkerTurm.addFirst(obersteMitte);
+		                  		mittlererTurm.remove(obersteMitte);
+				 				}
+		                       break;
+		                   case 'r':
+		                   	if (rechterTurm.isEmpty() || rechterTurm.peekLast() > obersteMitte)
+		                       rechterTurm.addFirst(obersteMitte);
+		                   		mittlererTurm.remove(obersteMitte);
+		                      break;
+		              }
+	        }
+          
+            break;
+         
+        case 'r':
+          	if (!rechterTurm.isEmpty()) {
+          		obersteRechts = rechterTurm.peekFirst();
+        		switch (to) {
+	                 case 'l':
+	                   	if (linkerTurm.isEmpty() || linkerTurm.peekLast() > obersteRechts){
+	                        linkerTurm.addFirst(obersteRechts);
+	                  		rechterTurm.remove(obersteRechts);
+			 				}
+	                       break;
+	                   case 'm':
+	                   	if (mittlererTurm.isEmpty() || mittlererTurm.peekLast() > obersteRechts) {
+	                   		mittlererTurm.addFirst(obersteRechts);
+	                   		rechterTurm.remove(obersteRechts);
+	                   	}
+	                   		break;
+	              }
+        }
+      
+        break;
+	            
+	            
+	    }
+
+	
 	}
 	
 	public void run() {
@@ -34,18 +106,15 @@ public class Hanoi {
 	}
 	
 	private Iterator<Integer> getLeftDescendingIterator() {
-		// TODO: Implement
-		return null;
+		return linkerTurm.descendingIterator();
 
 	}
 	private Iterator<Integer> getMiddleDescendingIterator() {
-		// TODO: Implement
-		return null;
+		return mittlererTurm.descendingIterator();
 
 	}
 	private Iterator<Integer> getRightDescendingIterator() {
-		// TODO: Implement
-		return null;
+		return rechterTurm.descendingIterator();
 	}
 	
 	public String toString() {
