@@ -26,13 +26,13 @@ public class Hanoi {
 	        case 'l':
 	                switch (to) {
 	                    case 'm':
-	                    	if (mittlererTurm.isEmpty() || mittlererTurm.peekLast() > obersteLinks) {
+	                    	if (mittlererTurm.isEmpty() || mittlererTurm.peekFirst() > obersteLinks) {
 	                    		mittlererTurm.addFirst(obersteLinks);
 	                    		linkerTurm.remove(obersteLinks);
 	                    	}
 	                        break;
 	                    case 'r':
-	                    	if (rechterTurm.isEmpty() || rechterTurm.peekLast() > obersteLinks)
+	                    	if (rechterTurm.isEmpty() || rechterTurm.peekFirst() > obersteLinks)
 	                    		rechterTurm.addFirst(obersteLinks);
 	                    		linkerTurm.remove(obersteLinks);
 	                        break; 
@@ -44,13 +44,13 @@ public class Hanoi {
               		obersteMitte = mittlererTurm.peekFirst();
 	        		switch (to) {
 		                 case 'l':
-		                   	if (linkerTurm.isEmpty() || linkerTurm.peekLast() > obersteMitte){
+		                   	if (linkerTurm.isEmpty() || linkerTurm.peekFirst() > obersteMitte){
 		                        linkerTurm.addFirst(obersteMitte);
 		                  		mittlererTurm.remove(obersteMitte);
 				 				}
 		                       break;
 		                   case 'r':
-		                   	if (rechterTurm.isEmpty() || rechterTurm.peekLast() > obersteMitte)
+		                   	if (rechterTurm.isEmpty() || rechterTurm.peekFirst() > obersteMitte)
 		                       rechterTurm.addFirst(obersteMitte);
 		                   		mittlererTurm.remove(obersteMitte);
 		                      break;
@@ -64,13 +64,13 @@ public class Hanoi {
           		obersteRechts = rechterTurm.peekFirst();
         		switch (to) {
 	                 case 'l':
-	                   	if (linkerTurm.isEmpty() || linkerTurm.peekLast() > obersteRechts){
+	                   	if (linkerTurm.isEmpty() || linkerTurm.peekFirst() > obersteRechts){
 	                        linkerTurm.addFirst(obersteRechts);
 	                  		rechterTurm.remove(obersteRechts);
 			 				}
 	                       break;
 	                   case 'm':
-	                   	if (mittlererTurm.isEmpty() || mittlererTurm.peekLast() > obersteRechts) {
+	                   	if (mittlererTurm.isEmpty() || mittlererTurm.peekFirst() > obersteRechts) {
 	                   		mittlererTurm.addFirst(obersteRechts);
 	                   		rechterTurm.remove(obersteRechts);
 	                   	}
