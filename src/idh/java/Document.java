@@ -1,5 +1,6 @@
 package idh.java;
-
+import java.util.Set;
+import java.util.HashSet;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
@@ -39,7 +40,18 @@ public class Document implements Iterable<String> {
 			if (i > 100)
 				break;
 		}
+		
+//		public Set<String> ttr(){
+//			Set<String> stringSet = new HashSet<String>();
+////			iterator(token);
+//			return Set<String>;
+//		}
 	}
+	// Methode um token in Menge zu speichern Set
+	//token schleife in Set hinzufügen, und mit Menge des Sets berechnen
+	
+	
+	
 
 	@Override
 	public Iterator<String> iterator() {
@@ -59,6 +71,7 @@ public class Document implements Iterable<String> {
 			
 		};
 	}
+	
 	
 	
 }
