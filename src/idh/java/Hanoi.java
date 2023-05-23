@@ -35,9 +35,12 @@ public class Hanoi {
 			if (to.equals("m")| cargo < getMiddleDescendingIterator(mi.get(mi.size()-1))){
 				mi.add(cargo);
 				cargo = 0;
+				li.removeLast();
+
 			}
 				if (cargo > getMiddleDescendingIterator(mi.get(mi.size()-1))){
 					System.out.println("Can only place smaller disks on bigger ones.");
+					cargo =0;
 					break;
 
 				}
@@ -51,9 +54,11 @@ public class Hanoi {
 			if (to.equals("l")| cargo < getLeftDescendingIterator(li.get(li.size()-1))){
 				li.add(cargo);
 				cargo = 0;
+				mi.removeLast();
 			
 			if (cargo > getLeftDescendingIterator(li.get(li.size()-1))){
 				System.out.println("Can only place smaller disks on bigger ones.");
+				cargo = 0;
 				break;
 			}
 
@@ -62,12 +67,14 @@ public class Hanoi {
 			if (to.equals("r")| cargo < getRightDescendingIterator(ri.get(ri.size()-1))){
 				ri.add(cargo);
 				cargo = 0;
+				mi.removeLast();
 			}
 			if(cargo > getRightDescendingIterator(ri.get(ri.size()-1))){
 				System.out.println("Can only place smaller disks on bigger ones.");
+				cargo = 0;
 				break;
 			}
-		}
+		}//moving things from the right stack
 		if(from.equals("r")){
 			getRightDescendingIterator(ri.gety(ri.size()-1));
 			cargo = ri.get(ri.size()-1);
@@ -75,9 +82,11 @@ public class Hanoi {
 			if(to.equals("m")| cargo < mi.get(mi.size()-1)){
 				ri.add(cargo);
 				cargo = 0;
+				mi.removeLast();
 			}
 			if(cargo > mi.get(mi.size()-1)){
 				System.out.println("Can only place smaller disks on bigger ones.");
+				cargo = 0;
 				break;
 			}
 		}
