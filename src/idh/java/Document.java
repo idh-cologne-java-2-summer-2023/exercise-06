@@ -10,45 +10,22 @@ import java.util.StringTokenizer;
 
 public class Document implements Iterable<String> {
 	
-	class DocumentIterator implements Iterator<String> {
-		Document docText;
-		int currentPosition = -1;
-		StringTokenizer st;
-		
-		public DocumentIterator(Document document) {
-			this.docText = document;
-			this.st = new StringTokenizer(docText.documentText);
-		}
-	
-		public boolean hasNext() {
-			return currentPosition < st.countTokens();
-		}
-	
-		public String next() {
-			currentPosition++;
-			tokenCounter++;
-			return (String) st.nextElement();
-		}
-		
-		
-	}
-	
 	String documentText;
 	int tokenCounter = 0;
 
-	public static Document readFromFile(File f) throws IOException {
-		FileReader fileReader = new FileReader(f);
-		int ch;
-		StringBuilder b = new StringBuilder();
-		while( (ch = fileReader.read()) != -1 ) {
-			b.append((char) ch);
+		public static Document readFromFile(File f) throws IOException {
+			FileReader fileReader = new FileReader(f);
+			int ch;
+			StringBuilder b = new StringBuilder();
+			while( (ch = fileReader.read()) != -1 ) {
+				b.append((char) ch);
+			}
+			fileReader.close();
+			Document doc = new Document();
+			doc.documentText = b.toString();
+			
+			return doc;
 		}
-		fileReader.close();
-		Document doc = new Document();
-		doc.documentText = b.toString();
-		
-		return doc;
-	}
 	
 	public String getDocumentText() {
 		return documentText;
@@ -80,28 +57,46 @@ public class Document implements Iterable<String> {
 
 
 	public Iterator<String> iterator() {
-		return new DocumentIterator(this);
-	}
+			return new Iterator<String>() {
+
+				StringTokenizer tokenizer = new StringTokenizer(documentText);
+				
+				@Override
+				public boolean hasNext() {
+					return tokenizer.hasMoreTokens();
+				}
+
+				@Override
+				public String next() {
+					return tokenizer.nextToken();
+				}
+				
+			};
+		}
 	
-	public boolean equals(Object o) {
-		if (! (o instanceof String))
-			return false;
-		String s = (String) o;
-		String t = String.valueOf(this);
-		return s.equalsIgnoreCase(t);
-	}
+	
+	/*
+	 * public boolean equals(Object o) { if (! (o instanceof String)) return false;
+	 * String s = (String) o; String t = String.valueOf(this); return
+	 * s.equalsIgnoreCase(t); }
+	 */
 	
 	
  	
 	
 	public double ttr() {
 		Set<String> trrSet = new HashSet<String>();
-		trrSet.add(this.iterator().next());
+		int tokenCounter = 0;
+		
+		for (String token : this) {
+			tokenCounter++;
+			trrSet.add(this.iterator().next());;
+		}
+		
 		int setSize = trrSet.size();
 		
-		int tokenCounter = this.getTokenCounter();
 		
-		double trr = setSize/tokenCounter;
+		double trr = (double) setSize/tokenCounter;
 		return trr;
 	}
 	
