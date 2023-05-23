@@ -10,10 +10,21 @@ public class Hanoi {
 
 	public Hanoi() {
 		// TODO: Implement
+		//on it
+		System.out.println(getLeftDescendingIterator());
+		System.out.println(getMiddleDescendingIterator());
+		System.out.println(getRightDescendingIterator());
+		run();
 	}
 	
-	private void movePiece(char from, char to) {
+	public void movePiece(String from, String to) {
 		// TODO: Implement
+		// on it                     <----------------------------------------wip
+		int cargo;
+		if(from.equals("l")){
+           getLeftDescendingIterator(left.get(left.size()-1));
+			cargo = left.get(left.size()-1);
+		}
 	}
 	
 	public void run() {
@@ -35,8 +46,7 @@ public class Hanoi {
 		}
 	}
 	
-	private Iterator<Integer> getLeftDescendingIterator() {
-		// TODO: Implement
+	public LinkedList<Integer> getLeftDescendingIterator() {
 		//on it
 	    LinkedList<Integer> left = new LinkedList<Integer>();
 		Iterator <Integer> li = left.iterator();
@@ -50,29 +60,30 @@ public class Hanoi {
 		left.add (7);
 		left.add (8);
 		left.add (9);
+
+		
 //might have to change this so they are added at the start of a game instead
 //of every time the method is called.
+		return left;
+     
+	  }
 	
-		
-
-		return null;
-
-	}
-	private Iterator<Integer> getMiddleDescendingIterator() {
+	public Iterator<Integer> getMiddleDescendingIterator() {
 		// TODO: Implement
 		//on it
 		LinkedList<Integer> middle = new LinkedList<Integer>();
 		Iterator <Integer> mi = middle.iterator();
-		return null;
+
+		return mi;
 
 
 	}
-	private Iterator<Integer> getRightDescendingIterator() {
+	public Iterator<Integer> getRightDescendingIterator() {
 		// TODO: Implement
 		// on it
 		LinkedList <Integer> right = new LinkedList<Integer>();
 		Iterator <Integer> ri = right.iterator();
-		return null;
+		return ri;
 
 	}
 	
