@@ -12,21 +12,21 @@ public class Document implements Iterable<String> {
 	String documentText;
 	
 	public double ttr() {
-		Set<String> wordSet = new HashSet<>();
-        int tokenCount = 0;
+		Set<String> words = new HashSet<>();
+        int Counter = 0;
 
         Iterator<String> iterator = iterator();
         while (iterator.hasNext()) {
             String token = iterator.next();
             if (!token.isEmpty()) {
-                wordSet.add(token);
-                tokenCount++;
+                words.add(token);
+                Counter++;
             }
 
         }
 
-        int typeCount = wordSet.size();
-        return (double) typeCount / tokenCount;
+        int typeCount = words.size();
+        return (double) typeCount / Counter;
     }
 
 	public static Document readFromFile(File f) throws IOException {
