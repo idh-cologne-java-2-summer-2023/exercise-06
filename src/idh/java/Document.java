@@ -5,9 +5,29 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Iterator;
 import java.util.StringTokenizer;
+import java.util.Set;
+import java.util.HashSet;
 
 public class Document implements Iterable<String> {
 	String documentText;
+	
+	public double ttr() {
+		Set<String> wordSet = new HashSet<>();
+        int tokenCount = 0;
+
+        Iterator<String> iterator = iterator();
+        while (iterator.hasNext()) {
+            String token = iterator.next();
+            if (!token.isEmpty()) {
+                wordSet.add(token);
+                tokenCount++;
+            }
+
+        }
+
+        int typeCount = wordSet.size();
+        return (double) typeCount / tokenCount;
+    }
 
 	public static Document readFromFile(File f) throws IOException {
 		FileReader fileReader = new FileReader(f);
@@ -33,6 +53,8 @@ public class Document implements Iterable<String> {
 	
 	public static final void main(String[] args) throws IOException {
 		Document d = Document.readFromFile(new File("data/dracula.txt"));
+		double ttrValue = d.ttr();
+	    System.out.println("TTR: " + ttrValue);
 		int i = 0;
 		for (String token : d) {
 			System.out.println(i++ + ": " + token + " ");
