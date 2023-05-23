@@ -3,17 +3,75 @@ package idh.java;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.Iterator;
+import java.util.ArrayDeque;
+import java.util.Deque;
 
 public class Hanoi {
 
+    private Deque<Integer> left;
+    private Deque<Integer> middle;
+    private Deque<Integer> right;
+
+	
+	
 	public Hanoi() {
-		// TODO: Implement
+        left = new ArrayDeque<>();
+        middle = new ArrayDeque<>();
+        right = new ArrayDeque<>();
+
+        // Initialize the left tower with disks of sizes 9 to 1
+        for (int i = 9; i >= 1; i--) {
+            left.push(i);
+        }
 	}
 	
-	private void movePiece(char from, char to) {
-		// TODO: Implement
-	}
+    private void movePiece(char from, char to) {
+        Deque<Integer> source = null;
+        Deque<Integer> target = null;
+
+        switch (from) {
+            case 'l':
+                source = left;
+                break;
+            case 'm':
+                source = middle;
+                break;
+            case 'r':
+                source = right;
+                break;
+
+        }
+
+        switch (to) {
+            case 'l':
+                target = left;
+                break;
+            case 'm':
+                target = middle;
+                break;
+            case 'r':
+                target = right;
+                break;
+          
+        }
+
+        // Überprüfen, ob der Zug gültig ist
+        if (source.isEmpty()) {
+            System.out.println("Quelle ist leer. Ungültiger Zug.");
+            return;
+        }
+
+        if (!target.isEmpty() && source.peek() > target.peek()) {
+            System.out.println("Untere Scheibe kleiner. Ungültiger Zug.");
+            return;
+        }
+
+        int disk = source.pop();
+        target.push(disk);
+    }
 	
+	
+ 
 	public void run() {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		while (true) {
@@ -33,20 +91,17 @@ public class Hanoi {
 		}
 	}
 	
-	private Iterator<Integer> getLeftDescendingIterator() {
-		// TODO: Implement
-		return null;
+    public Iterator<Integer> getLeftDescendingIterator() {
+        return left.descendingIterator();
+    }
 
-	}
-	private Iterator<Integer> getMiddleDescendingIterator() {
-		// TODO: Implement
-		return null;
+    public Iterator<Integer> getMiddleDescendingIterator() {
+        return middle.descendingIterator();
+    }
 
-	}
-	private Iterator<Integer> getRightDescendingIterator() {
-		// TODO: Implement
-		return null;
-	}
+    public Iterator<Integer> getRightDescendingIterator() {
+        return right.descendingIterator();
+    }
 	
 	public String toString() {
 		StringBuilder b = new StringBuilder();
