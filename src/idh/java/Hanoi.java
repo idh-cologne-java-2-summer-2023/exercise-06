@@ -15,6 +15,7 @@ public class Hanoi {
 		LinkedList<Integer> left = new LinkedList<Integer>();
 		LinkedList<Integer> middle = new LinkedList<Integer>();
 		LinkedList <Integer> right = new LinkedList<Integer>();
+
 		System.out.println(getLeftDescendingIterator());
 		System.out.println(getMiddleDescendingIterator());
 		System.out.println(getRightDescendingIterator());
@@ -150,7 +151,6 @@ public class Hanoi {
 	public Iterator<Integer> getRightDescendingIterator() {
 		// TODO: Implement
 		// on it
-		
 		Iterator <Integer> ri = right.iterator();
 		return ri;
 

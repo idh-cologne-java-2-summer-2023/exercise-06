@@ -58,22 +58,25 @@ public class Document implements Iterable<String> {
 				if (Types.contains(Tokens.get(Tokens.size()-1)) == false){
 					Types.add(tokenizer.nextToken());
 				}//Now we have a list of types and a list of tokens
-				TypeTokenRatio(0);
+				
+				//So now let´s do something with that list:
+				
+				double ttr = Types.size() / Tokens.size();
+				   System.out.println("Type token Ratio:" + ttr);
+				
 				return tokenizer.nextToken();
+
 
 				
 				
 
 			    
 			
-			}
-			public static  double TypeTokenRatio (double ttr){
-				 ttr = Types.size() / Tokens.size();
-				System.out.println("Type token Ratio:" + ttr);
-				return ttr;
-			}
+			
+			
+			
 		
-		};
+			}};
 	}
 	
 	public  final static void main(String[] args) throws IOException {
@@ -83,10 +86,13 @@ public class Document implements Iterable<String> {
 		//	System.out.println(i++ + ": " + token + " ");
 		//	if (i > 100)
 		//		break;
-		
-	
+		while(tokenizer.hasNext() == true){
+			tokenizer.next();
 		}
 		
+	   
+		}
+		//Why can´t I call ANY of this in main?!
 		
 	
     
