@@ -2,16 +2,47 @@ package idh.java;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.util.ArrayDeque;
 import java.util.Iterator;
 
 public class Hanoi {
-
+		ArrayDeque<Integer> l = new ArrayDeque<Integer>();
+		ArrayDeque<Integer> m = new ArrayDeque<Integer>();
+		ArrayDeque<Integer> r = new ArrayDeque<Integer>();
 	public Hanoi() {
-		// TODO: Implement
+		for (int i = 9; i >= 1; i--){
+			this.l.push(i);
+		}
+
 	}
-	
+	private ArrayDeque<Integer> towerSelect (char c) {
+
+		switch (c) {
+			case 'l':
+				return this.l;
+
+			case 'm':
+				return this.m;
+
+			case 'r':
+				return this.r;
+
+			default:
+				return null;
+
+		}
+	}
 	private void movePiece(char from, char to) {
-		// TODO: Implement
+		ArrayDeque<Integer> toTower = this.towerSelect(to);
+		ArrayDeque<Integer> fromTower = this.towerSelect(from);
+
+		if (fromTower.isEmpty()) {
+			System.out.println("The Stick " + from +" is empty");
+		} else if (!toTower.isEmpty() && fromTower.peekFirst() > toTower.peekFirst()) {
+			System.out.println("You can´t put "+ fromTower.peekFirst()+ " on to "+ toTower.peekFirst());
+		} else  {
+			toTower.addFirst(fromTower.pollFirst());
+		}
 	}
 	
 	public void run() {
@@ -34,18 +65,18 @@ public class Hanoi {
 	}
 	
 	private Iterator<Integer> getLeftDescendingIterator() {
-		// TODO: Implement
-		return null;
+
+		return this.l.descendingIterator();
 
 	}
 	private Iterator<Integer> getMiddleDescendingIterator() {
-		// TODO: Implement
-		return null;
+
+		return this.m.descendingIterator();
 
 	}
 	private Iterator<Integer> getRightDescendingIterator() {
-		// TODO: Implement
-		return null;
+
+		return this.r.descendingIterator();
 	}
 	
 	public String toString() {
