@@ -3,17 +3,53 @@ package idh.java;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.Iterator;
+import java.util.Stack;
 
 public class Hanoi {
 
+	private Stack<Integer> leftStack;
+	private Stack<Integer> middleStack;
+	private Stack<Integer> rightStack;
+
 	public Hanoi() {
-		// TODO: Implement
+		leftStack = new Stack<>();
+		middleStack = new Stack<>();
+		rightStack = new Stack<>();
+
+		// Scheiben der Größen 9 bis 1 auf dem linken Stab platzieren
+		for (int i = 9; i >= 1; i--) {
+			leftStack.push(i);
+		}
 	}
-	
+
 	private void movePiece(char from, char to) {
-		// TODO: Implement
+		Stack<Integer> sourceStack = getStackFromChar(from);
+		Stack<Integer> targetStack = getStackFromChar(to);
+
+		if (sourceStack != null && targetStack != null && !sourceStack.isEmpty()) {
+			int disk = sourceStack.pop();
+			targetStack.push(disk);
+		}
 	}
-	
+
+	private Stack<Integer> getStackFromChar(char c) {
+		switch (c) {
+			case 'l':
+				return leftStack;
+			case 'm':
+				return middleStack;
+			case 'r':
+				return rightStack;
+			default:
+				return null;
+		}
+	}
+
+	private Iterator<Integer> getDescendingIterator(Stack<Integer> stack) {
+		// Verwenden Sie den Iterator der Stack-Klasse, um die Scheiben absteigend zu durchlaufen
+		return stack.iterator();
+	}
+
 	public void run() {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		while (true) {
@@ -29,50 +65,34 @@ public class Hanoi {
 			} catch (Exception e) {
 				System.out.println("Try again, something's not right.");
 				// e.printStackTrace();
-			} 
+			}
 		}
 	}
-	
-	private Iterator<Integer> getLeftDescendingIterator() {
-		// TODO: Implement
-		return null;
 
-	}
-	private Iterator<Integer> getMiddleDescendingIterator() {
-		// TODO: Implement
-		return null;
-
-	}
-	private Iterator<Integer> getRightDescendingIterator() {
-		// TODO: Implement
-		return null;
-	}
-	
 	public String toString() {
 		StringBuilder b = new StringBuilder();
 		b.append("  |\n l|");
-		Iterator<Integer> iter;
-		iter = this.getLeftDescendingIterator();
-		while(iter.hasNext()) {
+		Iterator<Integer> iter = getDescendingIterator(leftStack);
+		while (iter.hasNext()) {
 			b.append(iter.next());
 			b.append(' ');
 		}
 		b.append("\n  |\n m|");
-		iter = this.getMiddleDescendingIterator();
-		while(iter.hasNext()) {
+		iter = getDescendingIterator(middleStack);
+		while (iter.hasNext()) {
 			b.append(iter.next());
 			b.append(' ');
 		}
 		b.append("\n  |\n r|");
-		iter = this.getRightDescendingIterator();
-		while(iter.hasNext()) {
+		iter = getDescendingIterator(rightStack);
+		while (iter.hasNext()) {
 			b.append(iter.next());
 			b.append(' ');
 		}
 		b.append("\n  |");
 		return b.toString();
 	}
-	
+
 	public static void main(String[] args) {
 		Hanoi hanoi = new Hanoi();
 		hanoi.run();
