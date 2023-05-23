@@ -12,6 +12,9 @@ public class Hanoi {
 	public Hanoi() {
 		// TODO: Implement
 		//on it
+		LinkedList<Integer> left = new LinkedList<Integer>();
+		LinkedList<Integer> middle = new LinkedList<Integer>();
+		LinkedList <Integer> right = new LinkedList<Integer>();
 		System.out.println(getLeftDescendingIterator());
 		System.out.println(getMiddleDescendingIterator());
 		System.out.println(getRightDescendingIterator());
@@ -114,7 +117,7 @@ public class Hanoi {
 	
 	public LinkedList<Integer> getLeftDescendingIterator() {
 		//on it
-	    LinkedList<Integer> left = new LinkedList<Integer>();
+	    
 		Iterator <Integer> li = left.iterator();
 		
 		left.add (1);
@@ -137,7 +140,7 @@ public class Hanoi {
 	public Iterator<Integer> getMiddleDescendingIterator() {
 		// TODO: Implement
 		//on it
-		LinkedList<Integer> middle = new LinkedList<Integer>();
+		
 		Iterator <Integer> mi = middle.iterator();
 
 		return mi;
@@ -147,7 +150,7 @@ public class Hanoi {
 	public Iterator<Integer> getRightDescendingIterator() {
 		// TODO: Implement
 		// on it
-		LinkedList <Integer> right = new LinkedList<Integer>();
+		
 		Iterator <Integer> ri = right.iterator();
 		return ri;
 
