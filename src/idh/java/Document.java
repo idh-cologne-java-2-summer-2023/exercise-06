@@ -3,6 +3,7 @@ package idh.java;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.StringTokenizer;
 
@@ -43,7 +44,11 @@ public class Document implements Iterable<String> {
 
 	@Override
 	public Iterator<String> iterator() {
-		return new Iterator<String>() {
+		return new Iterator<String> () {
+
+			double ttr;
+			 ArrayList<String> Tokens = new ArrayList<String>();
+			 ArrayList<String> Types = new ArrayList<String>();
 
 			StringTokenizer tokenizer = new StringTokenizer(documentText);
 			
@@ -54,11 +59,19 @@ public class Document implements Iterable<String> {
 
 			@Override
 			public String next() {
+				Tokens.add (tokenizer.nextToken());
+                if (Types.contains(Tokens.get(Tokens.size()-1)) == false){
+                    Types.add(tokenizer.nextToken());
+                }
+                ttr = Types.size() % Tokens.size();
+                System.out.println(ttr);
 				return tokenizer.nextToken();
+				
 			}
-			
 		};
 	}
+	
+	
 	
 	
 }
