@@ -3,15 +3,51 @@ package idh.java;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.Iterator;
+import java.util.Stack;
 
 public class Hanoi {
+	
+
+    
 
 	public Hanoi() {
-		// TODO: Implement
+		
+	    for (int i = 9; i >= 1; i--) {
+	        lStack.push(i);
+	    }
+	    
+	    
+	    
 	}
 	
 	private void movePiece(char from, char to) {
-		// TODO: Implement
+		
+		 Stack<Integer> sourceStack;
+		    Stack<Integer> targetStack;
+
+		    if (from == 'l') {
+		        sourceStack = lStack;
+		    } else if (from == 'm') {
+		        sourceStack = mStack;
+		    } else {
+		        sourceStack = rStack;
+		    }
+
+		    if (to == 'l') {
+		        targetStack = lStack;
+		    } else if (to == 'm') {
+		        targetStack = mStack;
+		    } else {
+		        targetStack = rStack;
+		    }
+
+		    if (!sourceStack.isEmpty() && (targetStack.isEmpty() || sourceStack.peek() < targetStack.peek())) {
+		        int disk = sourceStack.pop();
+		        targetStack.push(disk);
+		    }
+		
+		
+		
 	}
 	
 	public void run() {
@@ -34,18 +70,18 @@ public class Hanoi {
 	}
 	
 	private Iterator<Integer> getLeftDescendingIterator() {
-		// TODO: Implement
-		return null;
+		
+		return lStack.descendingIterator();;
 
 	}
 	private Iterator<Integer> getMiddleDescendingIterator() {
-		// TODO: Implement
-		return null;
+		
+		return mStack.descendingIterator();;
 
 	}
 	private Iterator<Integer> getRightDescendingIterator() {
-		// TODO: Implement
-		return null;
+		
+		return rStack.descendingIterator();;
 	}
 	
 	public String toString() {
@@ -76,6 +112,9 @@ public class Hanoi {
 	public static void main(String[] args) {
 		Hanoi hanoi = new Hanoi();
 		hanoi.run();
+		Stack lStack = new Stack<>();
+	    Stack mStack = new Stack<>();
+	    Stack rStack = new Stack<>();
 	}
 
 }
