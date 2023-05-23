@@ -3,7 +3,9 @@ package idh.java;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.HashSet;
 import java.util.Iterator;
+import java.util.Set;
 import java.util.StringTokenizer;
 
 public class Document implements Iterable<String> {
@@ -36,9 +38,11 @@ public class Document implements Iterable<String> {
 		int i = 0;
 		for (String token : d) {
 			System.out.println(i++ + ": " + token + " ");
-			if (i > 100)
-				break;
+			//if (i > 100)
+			//	break;
 		}
+		System.out.println(ttr(d));
+
 	}
 
 	@Override
@@ -59,6 +63,17 @@ public class Document implements Iterable<String> {
 			
 		};
 	}
-	
-	
+
+	public static double ttr(Document d){
+		Set<String> tockenSet = new HashSet<String>();
+		int i = 0;
+		for (String token : d) {
+			tockenSet.add(token);
+			i++;
+		}
+		double tokenValue = tockenSet.size();
+		double wordValue = i;
+	return tokenValue / wordValue;
+	}
+
 }
