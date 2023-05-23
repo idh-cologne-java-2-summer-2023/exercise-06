@@ -40,7 +40,7 @@ public class Document implements Iterable<String> {
 				break;
 		}
 	}
-
+//Ah, I see he went witth the "more elegant" option
 	@Override
 	public Iterator<String> iterator() {
 		return new Iterator<String>() {
