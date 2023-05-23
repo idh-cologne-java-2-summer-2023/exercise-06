@@ -8,6 +8,7 @@ import java.util.Stack;
 
 public class Hanoi {
 
+
 	public Hanoi() {
 		// TODO: Implement
 		//on it
@@ -15,16 +16,72 @@ public class Hanoi {
 		System.out.println(getMiddleDescendingIterator());
 		System.out.println(getRightDescendingIterator());
 		run();
+		if(getRightDescendingIterator(ri.size().equals(9))){
+			System.out.println("Thank you for playing, you win. Oh, joy.");
+		
+
+		}
 	}
 	
 	public void movePiece(String from, String to) {
 		// TODO: Implement
 		// on it                     <----------------------------------------wip
+		//moving things from the left stack
 		int cargo;
 		if(from.equals("l")){
-           getLeftDescendingIterator(left.get(left.size()-1));
-			cargo = left.get(left.size()-1);
+           getLeftDescendingIterator(li.get(li.size()-1));
+			cargo = li.get(li.size()-1);
+
+			if (to.equals("m")| cargo < getMiddleDescendingIterator(mi.get(mi.size()-1))){
+				mi.add(cargo);
+				cargo = 0;
+			}
+				if (cargo > getMiddleDescendingIterator(mi.get(mi.size()-1))){
+					System.out.println("Can only place smaller disks on bigger ones.");
+					break;
+
+				}
+
+			
 		}
+//moving things from the middle stack
+		if (from.equals("m")){
+			getMiddleDescendingIterator(mi.get(mi.size()-1));
+			cargo = mi.get(mi.size()-1);
+			if (to.equals("l")| cargo < getLeftDescendingIterator(li.get(li.size()-1))){
+				li.add(cargo);
+				cargo = 0;
+			
+			if (cargo > getLeftDescendingIterator(li.get(li.size()-1))){
+				System.out.println("Can only place smaller disks on bigger ones.");
+				break;
+			}
+
+			}
+
+			if (to.equals("r")| cargo < getRightDescendingIterator(ri.get(ri.size()-1))){
+				ri.add(cargo);
+				cargo = 0;
+			}
+			if(cargo > getRightDescendingIterator(ri.get(ri.size()-1))){
+				System.out.println("Can only place smaller disks on bigger ones.");
+				break;
+			}
+		}
+		if(from.equals("r")){
+			getRightDescendingIterator(ri.gety(ri.size()-1));
+			cargo = ri.get(ri.size()-1);
+
+			if(to.equals("m")| cargo < mi.get(mi.size()-1)){
+				ri.add(cargo);
+				cargo = 0;
+			}
+			if(cargo > mi.get(mi.size()-1)){
+				System.out.println("Can only place smaller disks on bigger ones.");
+				break;
+			}
+		}
+
 	}
 	
 	public void run() {
@@ -64,7 +121,7 @@ public class Hanoi {
 		
 //might have to change this so they are added at the start of a game instead
 //of every time the method is called.
-		return left;
+		return li;
      
 	  }
 	
