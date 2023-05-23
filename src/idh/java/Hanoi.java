@@ -17,65 +17,29 @@ public class Hanoi {
 		}
 	}
 
-	private void movePiece(char from, char to) {
-		int buffer = 0;
-		switch (from) {
+	private Deque<Integer> getQ(char x) {
+		switch (x) {
 		case 'l': {
-			buffer = qLeft.pop();
-			switch (to) {
-			case 'l': {
-				qLeft.push(buffer);
-				break;
-			}
-			case 'm': {
-				qMiddle.push(buffer);
-				break;
-			}
-			case 'r': {
-				qRight.push(buffer);
-				break;
-			}
-			}
-			break;
+			return qLeft;
 		}
 		case 'm': {
-			buffer = qMiddle.pop();
-			switch (to) {
-			case 'l': {
-				qLeft.push(buffer);
-				break;
-			}
-			case 'm': {
-				qMiddle.push(buffer);
-				break;
-			}
-			case 'r': {
-				qRight.push(buffer);
-				break;
-			}
-			}
-			break;
+			return qMiddle;
 		}
-
 		case 'r': {
-			buffer = qRight.pop();
-			switch (to) {
-			case 'l': {
-				qLeft.push(buffer);
-				break;
-			}
-			case 'm': {
-				qMiddle.push(buffer);
-				break;
-			}
-			case 'r': {
-				qRight.push(buffer);
-				break;
-			}
-			}
-			break;
+			return qRight;
+		}
+		default: {
+			return null;
+		}
 		}
 
+	}
+
+	private void movePiece(char from, char to) {
+		if (!getQ(to).isEmpty() && getQ(from).peek() > getQ(to).peek()) {
+			System.out.println("The size of the disk to move is larger than the last disk on the stack!");
+		} else {
+			getQ(to).push(getQ(from).pop());
 		}
 	}
 
