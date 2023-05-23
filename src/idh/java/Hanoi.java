@@ -1,18 +1,58 @@
 package idh.java;
 
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.Iterator;
+import java.util.LinkedList;
 
 public class Hanoi {
+	 private LinkedList<Integer> leftStack;
+	    private LinkedList<Integer> middleStack;
+	    private LinkedList<Integer> rightStack;
 
 	public Hanoi() {
-		// TODO: Implement
-	}
+		leftStack = new LinkedList<>();
+        middleStack = new LinkedList<>();
+        rightStack = new LinkedList<>();
+
+       
+        for (int i = 9; i >= 1; i--) {
+            leftStack.push(i);
+        }
+    }
+
 	
 	private void movePiece(char from, char to) {
-		// TODO: Implement
-	}
+		 LinkedList<Integer> sourceStack = getStackFromChar(from);
+	        LinkedList<Integer> targetStack = getStackFromChar(to);
+
+	        if (sourceStack.isEmpty()) {
+	            System.out.println("Quelle ist leer. Ungültiger Zug.");
+	            return;
+	        }
+
+	        if (!targetStack.isEmpty() && sourceStack.peek() > targetStack.peek()) {
+	            System.out.println("Ungültiger Zug. Eine größere Scheibe darf nicht auf einer kleineren liegen.");
+	            return;
+	        }
+
+	        int disk = sourceStack.pop();
+	        targetStack.push(disk);
+	    }
+
+	    private LinkedList<Integer> getStackFromChar(char c) {
+	        if (c == 'l') {
+	            return leftStack;
+	        } else if (c == 'm') {
+	            return middleStack;
+	        } else if (c == 'r') {
+	            return rightStack;
+	        } else {
+	            throw new IllegalArgumentException("Ungültiger Stab: " + c);
+	        }
+	    }
+	
 	
 	public void run() {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -33,20 +73,21 @@ public class Hanoi {
 		}
 	}
 	
+	private Iterator<Integer> getDescendingIterator(LinkedList<Integer> stack) {
+	        return stack.descendingIterator();
+	    }
+	
 	private Iterator<Integer> getLeftDescendingIterator() {
-		// TODO: Implement
-		return null;
-
+		return getDescendingIterator(leftStack);
 	}
+	
 	private Iterator<Integer> getMiddleDescendingIterator() {
-		// TODO: Implement
-		return null;
-
+		return getDescendingIterator(middleStack);
 	}
+	
 	private Iterator<Integer> getRightDescendingIterator() {
-		// TODO: Implement
-		return null;
-	}
+		 return getDescendingIterator(rightStack);	
+		 }
 	
 	public String toString() {
 		StringBuilder b = new StringBuilder();
