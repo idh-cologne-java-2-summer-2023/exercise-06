@@ -2,18 +2,50 @@ package idh.java;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.util.ArrayDeque;
+import java.util.Deque;
 import java.util.Iterator;
 
 public class Hanoi {
+	 Deque<Integer> leftTurm;
+	 Deque<Integer> middleTurm;
+	 Deque<Integer> rightTurm;
+	 
+	 final int StackSize = 9;
 
 	public Hanoi() {
-		// TODO: Implement
+		
+		leftTurm = new ArrayDeque<>();
+		middleTurm = new ArrayDeque<>();
+		rightTurm = new ArrayDeque<>();
+		
+		for (int i = 9; i <StackSize; i++) {
+		leftTurm.push(i+1);
+		}
+		
 	}
 	
 	private void movePiece(char from, char to) {
-		// TODO: Implement
+		Deque<Integer> fromTurm = getTurm(from);
+		Deque<Integer> toTurm =getTurm(to);
 	}
 	
+	private Deque<Integer> getTurm(char rod) {
+		switch (Character.toLowerCase(rod)) {
+		case 'l':
+			return leftTurm;
+		
+		case 'm':
+			return middleTurm;
+			
+		case 'r':
+			return rightTurm;
+	
+		}
+		return null;
+		
+	}
+
 	public void run() {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		while (true) {
@@ -34,17 +66,14 @@ public class Hanoi {
 	}
 	
 	private Iterator<Integer> getLeftDescendingIterator() {
-		// TODO: Implement
 		return null;
 
 	}
 	private Iterator<Integer> getMiddleDescendingIterator() {
-		// TODO: Implement
 		return null;
 
 	}
 	private Iterator<Integer> getRightDescendingIterator() {
-		// TODO: Implement
 		return null;
 	}
 	
