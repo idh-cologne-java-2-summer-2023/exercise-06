@@ -3,7 +3,9 @@ package idh.java;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.HashSet;
 import java.util.Iterator;
+import java.util.Set;
 import java.util.StringTokenizer;
 
 public class Document implements Iterable<String> {
@@ -39,6 +41,9 @@ public class Document implements Iterable<String> {
 			if (i > 100)
 				break;
 		}
+		//Hier habe ich die Ausgabe von ttr definiert 
+		 double ttr = d.ttr();
+	        System.out.println("TTR: " + ttr);
 	}
 
 	@Override
@@ -59,6 +64,17 @@ public class Document implements Iterable<String> {
 			
 		};
 	}
-	
+	//Hier wird ttr berechnet 
+	 public double ttr() {
+	        Set<String> uniqueTokens = new HashSet<>();
+	        int totalTokens = 0;
+
+	        for (String token : this) {
+	            uniqueTokens.add(token);
+	            totalTokens++;
+	        }
+
+	        return (double) uniqueTokens.size() / totalTokens;
+	    }
 	
 }

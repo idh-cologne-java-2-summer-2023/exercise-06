@@ -3,15 +3,50 @@ package idh.java;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.Queue;
 
+//Hier wurden Queue hinugefügt, um eine Eingabe für die verschiednen Stacks zu ermöglichen 
 public class Hanoi {
-
+    private Queue<Integer> leftStack;
+    private Queue<Integer> middleStack;
+    private Queue<Integer> rightStack;
+    
+    //Hier wurden die Stacks mit der LinkedList verbunden und eine Schleife hinzugefügt, um den linken Stab zu defninieren
 	public Hanoi() {
-		// TODO: Implement
+		 leftStack = new LinkedList<>();
+	        middleStack = new LinkedList<>();
+	        rightStack = new LinkedList<>();
+
+	        for (int i = 9; i >= 1; i--) {
+	            leftStack.offer(i);
+	        }
 	}
 	
+	//Hier habe ich mit if-else gearbeitet, um zu definieren, was getan werden soll, wenn etwas eingegeben wird 
 	private void movePiece(char from, char to) {
-		// TODO: Implement
+		Queue<Integer> sourceStack;
+        Queue<Integer> targetStack;
+
+        if (from == 'l') {
+            sourceStack = leftStack;
+        } else if (from == 'm') {
+            sourceStack = middleStack;
+        } else {
+            sourceStack = rightStack;
+        }
+
+        if (to == 'l') {
+            targetStack = leftStack;
+        } else if (to == 'm') {
+            targetStack = middleStack;
+        } else {
+            targetStack = rightStack;
+        }
+        Integer piece = sourceStack.poll();
+        if (piece != null) {
+            targetStack.offer(piece);
+        }
 	}
 	
 	public void run() {
@@ -33,19 +68,17 @@ public class Hanoi {
 		}
 	}
 	
+	//Hier werden Iteratoren zurückgegeben, die die Stacks durchlaufen und die gwünschte Methode liefern 
 	private Iterator<Integer> getLeftDescendingIterator() {
-		// TODO: Implement
-		return null;
+		  return ((LinkedList<Integer>) leftStack).descendingIterator();
 
 	}
 	private Iterator<Integer> getMiddleDescendingIterator() {
-		// TODO: Implement
-		return null;
+		return ((LinkedList<Integer>) middleStack).descendingIterator();
 
 	}
 	private Iterator<Integer> getRightDescendingIterator() {
-		// TODO: Implement
-		return null;
+		 return ((LinkedList<Integer>) rightStack).descendingIterator();
 	}
 	
 	public String toString() {
