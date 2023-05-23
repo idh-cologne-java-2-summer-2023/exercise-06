@@ -57,14 +57,8 @@ public class Document implements Iterable<String> {
 				return tokenizer.nextToken();
 				
 				
-				  | 
-				  l|9 8 7 6
-				   |
-				  m|5 4
-				   |
-				  r|3 2 1
-				   |
-			};
+				  
+			}
 			
 		};
 	}
