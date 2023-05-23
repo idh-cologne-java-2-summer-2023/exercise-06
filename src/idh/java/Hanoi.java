@@ -3,16 +3,57 @@ package idh.java;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.Iterator;
+import java.util.ArrayDeque;
+import java.util.Deque;
 
 public class Hanoi {
 
-	public Hanoi() {
-		// TODO: Implement
+	Deque<Integer> left;
+    Deque<Integer> middle;
+    Deque<Integer> right;
+
+    public Hanoi() {
+        initializeStacks();
+    }
+	
+	private void initializeStacks() {
+		left = new ArrayDeque<>();
+		middle = new ArrayDeque<>();
+		right = new ArrayDeque<>();
+        for (int i = 9; i >= 1; i--) {
+            left.push(i);
+        }
+    }
+
+	private void movePiece(char from, char to) {
+		Deque<Integer> sourceStack = getStackByChar(from);
+        Deque<Integer> targetStack = getStackByChar(to);
+        if (sourceStack != null && targetStack != null && sourceStack != targetStack) {
+            if (isMoveValid(sourceStack, targetStack)) {
+                int pieceToMove = sourceStack.pop();
+                targetStack.push(pieceToMove);
+            } else {
+                System.out.println("Invalid move! Cannot place a larger disk on top of a smaller one.");
+            }
+        } else {
+            System.out.println("Invalid move! Make sure you entered valid source and target sticks.");
+        }
 	}
 	
-	private void movePiece(char from, char to) {
-		// TODO: Implement
-	}
+	private Deque<Integer> getStackByChar(char c) {
+        if (c == 'l') {
+            return left;
+        } else if (c == 'm') {
+            return middle;
+        } else if (c == 'r') {
+            return right;
+        }
+        return null;
+    }
+
+    private boolean isMoveValid(Deque<Integer> source, Deque<Integer> target) {
+        return target.isEmpty() || source.peek() < target.peek();
+    }
 	
 	public void run() {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -33,20 +74,21 @@ public class Hanoi {
 		}
 	}
 	
-	private Iterator<Integer> getLeftDescendingIterator() {
-		// TODO: Implement
-		return null;
+	  private Iterator<Integer> getDescendingIterator(Deque<Integer> stack) {
+	        return stack.descendingIterator();
+	    }
 
-	}
-	private Iterator<Integer> getMiddleDescendingIterator() {
-		// TODO: Implement
-		return null;
+    private Iterator<Integer> getLeftDescendingIterator() {
+        return getDescendingIterator(left);
+    }
 
-	}
-	private Iterator<Integer> getRightDescendingIterator() {
-		// TODO: Implement
-		return null;
-	}
+    private Iterator<Integer> getMiddleDescendingIterator() {
+        return getDescendingIterator(middle);
+    }
+
+    private Iterator<Integer> getRightDescendingIterator() {
+        return getDescendingIterator(right);
+    }
 	
 	public String toString() {
 		StringBuilder b = new StringBuilder();
@@ -79,3 +121,4 @@ public class Hanoi {
 	}
 
 }
+
