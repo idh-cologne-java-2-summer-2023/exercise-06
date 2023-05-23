@@ -1,27 +1,44 @@
 package idh.java;
 
-import java.io.File;
+
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Iterator;
 import java.util.StringTokenizer;
 
 public class Document implements Iterable<String> {
-	String documentText;
+    private String filePath;
 
-	public static Document readFromFile(File f) throws IOException {
-		FileReader fileReader = new FileReader(f);
-		int ch;
-		StringBuilder b = new StringBuilder();
-		while( (ch = fileReader.read()) != -1 ) {
-			b.append((char) ch);
-		}
-		fileReader.close();
-		Document doc = new Document();
-		doc.documentText = b.toString();
-		
-		return doc;
-	}
+    public Document(String filePath) {
+        this.filePath = filePath;
+    }
+
+    @Override
+    public Iterator<String> iterator() {
+        return new DocumentIterator();
+    }
+
+    public double ttr() {
+        Set<String> types = new HashSet<>();
+        int tokenCount = 0;
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] tokens = line.split("\\s+");
+                for (String token : tokens) {
+                    if (!token.isEmpty()) {
+                        types.add(token);
+                        tokenCount++;
+                    }
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return (double) types.size() / tokenCount;
+    }
 	
 	public String getDocumentText() {
 		return documentText;
