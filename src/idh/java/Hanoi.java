@@ -3,17 +3,53 @@ package idh.java;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.Iterator;
+import java.util.Stack;
 
 public class Hanoi {
 
+	private Stack<Integer> leftStack;
+	private Stack<Integer> middleStack;
+	private Stack<Integer> rightStack;
+
 	public Hanoi() {
-		// TODO: Implement
+		leftStack = new Stack<>();
+		middleStack = new Stack<>();
+		rightStack = new Stack<>();
+
+		for (int i = 9; i >= 1; i--) {
+			leftStack.push(i);
+		}
 	}
-	
+
 	private void movePiece(char from, char to) {
 		// TODO: Implement
+		Stack<Integer> sourceStack = getStack(from);
+		Stack<Integer> targetStack = getStack(to);
+		
+		if(sourceStack.isEmpty()) {
+			System.out.println("The source stack is empty.");
+			return;
+		}
+		if (!targetStack.isEmpty() && sourceStack.peek() > targetStack.peek()) {
+			System.out.println("Bigger disks can't be put on smaller ones.");
+			return;
+		}
+		int disk = sourceStack.pop();
+		targetStack.push(disk);
 	}
 	
+	private Stack<Integer> getStack(char stack) {
+		if(stack == 'l') {
+				return leftStack;
+		} else if (stack == 'm') {
+			return middleStack;
+		} else if(stack == 'r') {
+			return rightStack;
+		} else {
+			throw new IllegalArgumentException("Invalid Stack " + stack);
+		}
+	}
+
 	public void run() {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		while (true) {
@@ -35,17 +71,17 @@ public class Hanoi {
 	
 	private Iterator<Integer> getLeftDescendingIterator() {
 		// TODO: Implement
-		return null;
-
+		return leftStack.iterator();
 	}
+	
 	private Iterator<Integer> getMiddleDescendingIterator() {
-		// TODO: Implement
-		return null;
-
+		// TODO: Implement	
+		return middleStack.iterator();
 	}
+	
 	private Iterator<Integer> getRightDescendingIterator() {
 		// TODO: Implement
-		return null;
+		return rightStack.iterator();
 	}
 	
 	public String toString() {
@@ -77,5 +113,4 @@ public class Hanoi {
 		Hanoi hanoi = new Hanoi();
 		hanoi.run();
 	}
-
 }
