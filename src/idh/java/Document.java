@@ -3,7 +3,9 @@ package idh.java;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.HashSet;
 import java.util.Iterator;
+import java.util.Set;
 import java.util.StringTokenizer;
 
 public class Document implements Iterable<String> {
@@ -13,31 +15,33 @@ public class Document implements Iterable<String> {
 		FileReader fileReader = new FileReader(f);
 		int ch;
 		StringBuilder b = new StringBuilder();
-		while( (ch = fileReader.read()) != -1 ) {
+		while ((ch = fileReader.read()) != -1) {
 			b.append((char) ch);
 		}
 		fileReader.close();
 		Document doc = new Document();
 		doc.documentText = b.toString();
-		
+
 		return doc;
 	}
-	
+
 	public String getDocumentText() {
-		return documentText;
+		return this.documentText;
 	}
 
 	public void setDocumentText(String documentText) {
 		this.documentText = documentText;
 	}
-	
+
 	public static final void main(String[] args) throws IOException {
 		Document d = Document.readFromFile(new File("data/dracula.txt"));
+		System.out.println(ttr(d));
 		int i = 0;
 		for (String token : d) {
 			System.out.println(i++ + ": " + token + " ");
-			if (i > 100)
+			if (i > 100) {
 				break;
+			}
 		}
 	}
 
@@ -45,20 +49,32 @@ public class Document implements Iterable<String> {
 	public Iterator<String> iterator() {
 		return new Iterator<String>() {
 
-			StringTokenizer tokenizer = new StringTokenizer(documentText);
-			
+			StringTokenizer tokenizer = new StringTokenizer(Document.this.documentText);
+
 			@Override
 			public boolean hasNext() {
-				return tokenizer.hasMoreTokens();
+				return this.tokenizer.hasMoreTokens();
 			}
 
 			@Override
 			public String next() {
-				return tokenizer.nextToken();
+				return this.tokenizer.nextToken();
 			}
-			
+
 		};
 	}
-	
-	
+
+	public static double ttr(Document d) {
+
+		Set<String> types = new HashSet<>();
+		int totalWords = 0;
+
+		for (String word : d) {
+			types.add(word);
+			totalWords++;
+		}
+
+		return (double) types.size() / totalWords;
+	}
+
 }
