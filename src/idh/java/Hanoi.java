@@ -28,7 +28,9 @@ public class Hanoi {
 				}
 			} catch (Exception e) {
 				System.out.println("Try again, something's not right.");
-				// e.printStackTrace();
+				 e.printStackTrace();
+				 System.out.println("Tower of Hanoi just endet. Please restart the program.");
+				break;
 			} 
 		}
 	}

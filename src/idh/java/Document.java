@@ -5,6 +5,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Iterator;
 import java.util.StringTokenizer;
+import java.util.HashSet; 
 
 public class Document implements Iterable<String> {
 	String documentText;
@@ -32,14 +33,24 @@ public class Document implements Iterable<String> {
 	}
 	
 	public static final void main(String[] args) throws IOException {
+		HashSet myHashSet = new HashSet();
 		Document d = Document.readFromFile(new File("data/dracula.txt"));
 		int i = 0;
 		for (String token : d) {
 			System.out.println(i++ + ": " + token + " ");
-			if (i > 100)
+			if (i > 100)//hier wird die maximale Zeilenanzahl der Konsolenausgabe begrenzt. Standardwert ist 100
+				//hier einbauen, dass der Token zu einer Liste/Hashset hinzugefügt wird
+//				myHashSet.add(token);
+//			String test = myHashSet.toString();
+//			System.out.println(test);
 				break;
 		}
 	}
+//	public String toString() {
+//		System.out.println(myHashSet);
+//
+//		return null;
+//	}
 
 	@Override
 	public Iterator<String> iterator() {
@@ -59,6 +70,15 @@ public class Document implements Iterable<String> {
 			
 		};
 	}
-	
+	//Funktion ttr()
+//	
+//	public double ttr() {
+//		
+//		
+//		double ret = 0;
+//		
+//		return ret;
+//	}
+//	
 	
 }
