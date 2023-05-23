@@ -64,7 +64,7 @@ public class Document implements Iterable<String> {
 				   |
 				  r|3 2 1
 				   |
-			}
+			};
 			
 		};
 	}
