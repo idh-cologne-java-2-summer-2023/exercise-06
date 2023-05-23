@@ -3,7 +3,9 @@ package idh.java;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.HashSet;
 import java.util.Iterator;
+import java.util.Set;
 import java.util.StringTokenizer;
 
 public class Document implements Iterable<String> {
@@ -13,16 +15,29 @@ public class Document implements Iterable<String> {
 		FileReader fileReader = new FileReader(f);
 		int ch;
 		StringBuilder b = new StringBuilder();
-		while( (ch = fileReader.read()) != -1 ) {
+		while ((ch = fileReader.read()) != -1) {
 			b.append((char) ch);
 		}
 		fileReader.close();
 		Document doc = new Document();
 		doc.documentText = b.toString();
-		
+
 		return doc;
 	}
-	
+
+	public double ttr() {
+		Set<String> tokenSet = new HashSet<String>();
+		double i = 0;
+		for (String token : this) {
+			i++;
+			tokenSet.add(token);
+		}
+		double d = (double) tokenSet.size();
+		double res = d / i;
+		return res;
+
+	}
+
 	public String getDocumentText() {
 		return documentText;
 	}
@@ -30,15 +45,10 @@ public class Document implements Iterable<String> {
 	public void setDocumentText(String documentText) {
 		this.documentText = documentText;
 	}
-	
+
 	public static final void main(String[] args) throws IOException {
 		Document d = Document.readFromFile(new File("data/dracula.txt"));
-		int i = 0;
-		for (String token : d) {
-			System.out.println(i++ + ": " + token + " ");
-			if (i > 100)
-				break;
-		}
+		System.out.println(d.ttr());
 	}
 
 	@Override
@@ -46,7 +56,7 @@ public class Document implements Iterable<String> {
 		return new Iterator<String>() {
 
 			StringTokenizer tokenizer = new StringTokenizer(documentText);
-			
+
 			@Override
 			public boolean hasNext() {
 				return tokenizer.hasMoreTokens();
@@ -56,9 +66,6 @@ public class Document implements Iterable<String> {
 			public String next() {
 				return tokenizer.nextToken();
 			}
-			
 		};
 	}
-	
-	
 }
