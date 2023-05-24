@@ -3,15 +3,151 @@ package idh.java;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.Iterator;
+import java.util.Stack;
 
 public class Hanoi {
+	
+	public Stack<Integer> stL = new Stack<Integer>();
+	public Stack<Integer> stM = new Stack<Integer>();
+	public Stack<Integer> stR = new Stack<Integer>();
 
 	public Hanoi() {
-		// TODO: Implement
+		
+		for (int i = 9; i > 0; i--) {
+			stL.push(i);
+		}
 	}
 	
 	private void movePiece(char from, char to) {
-		// TODO: Implement
+		
+		switch (from) {
+			case 'l': {
+				
+				switch (to) {
+				
+					case 'l': {
+						
+						stL.push(stL.pop());
+						
+						break;}
+					
+					case 'm': {
+						
+						if(stL.peek() > stM.peek() ) {
+							
+							System.out.println("You cant move this way");
+							
+							break;}
+						
+							stM.push(stL.pop());
+								
+						break;}
+				
+					case 'r': {
+						
+						if(stL.peek() > stR.peek() ) {
+							
+							System.out.println("You cant move this way");
+							
+							break;}
+						
+						stR.push(stL.pop());
+						
+						break;}
+					
+					default:
+						throw new IllegalArgumentException("Unexpected value: " + to);
+				}
+				
+				break;
+			}
+			
+			case 'm': {
+				
+				switch (to) {
+				
+				case 'l': {
+					
+					if(stM.peek() < stL.peek() ) {
+						
+						System.out.println("You cant move this way");
+						
+						break;}
+					
+					stL.push(stM.pop());
+					
+					break;}
+				
+				case 'm': {
+					
+					stM.push(stM.pop());
+							
+					break;}
+			
+				case 'r': {
+					
+					if(stM.peek() < stR.peek() ) {
+						
+						System.out.println("You cant move this way");
+						
+						break;}
+					
+					stR.push(stM.pop());
+					
+					break;}
+				
+				default:
+					throw new IllegalArgumentException("Unexpected value: " + to);
+			}
+						
+				break;
+					}
+			
+			case 'r': {
+				
+				switch (to) {
+				
+				case 'l': {
+					
+					if(stR.peek() < stL.peek() ) {
+						
+						System.out.println("You cant move this way");
+						
+						break;}
+					
+					stL.push(stR.pop());
+					
+					break;}
+				
+				case 'm': {
+					
+					if(stR.peek() < stM.peek() ) {
+						
+						System.out.println("You cant move this way");
+						
+						break;}
+					
+					stM.push(stR.pop());
+							
+					break;}
+			
+				case 'r': {
+					
+					stR.push(stR.pop());
+					
+					break;}
+				
+				default:
+					throw new IllegalArgumentException("Unexpected value: " + to);
+			}
+				
+				break;
+			}
+			
+		
+			default:
+				throw new IllegalArgumentException("Unexpected value: " + from);
+		}
 	}
 	
 	public void run() {
@@ -34,18 +170,18 @@ public class Hanoi {
 	}
 	
 	private Iterator<Integer> getLeftDescendingIterator() {
-		// TODO: Implement
-		return null;
+		
+		return stL.iterator();
 
 	}
 	private Iterator<Integer> getMiddleDescendingIterator() {
-		// TODO: Implement
-		return null;
+		
+		return stM.iterator();
 
 	}
 	private Iterator<Integer> getRightDescendingIterator() {
-		// TODO: Implement
-		return null;
+		
+		return stR.iterator();
 	}
 	
 	public String toString() {
