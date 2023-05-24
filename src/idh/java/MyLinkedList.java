@@ -40,6 +40,13 @@ public class MyLinkedList<T> implements List<T> {
 	    }
 	}
 
+	public void removeLast() {
+	    if (isEmpty()) {
+	        throw new NoSuchElementException("Die Liste ist leer.");
+	    }
+	    
+	    remove(size() - 1);
+	}
 
 	@Override
 	public boolean isEmpty() {

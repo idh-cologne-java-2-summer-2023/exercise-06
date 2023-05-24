@@ -12,7 +12,7 @@ public class Hanoi<T> extends MyLinkedList<T> {
 	 MyLinkedList<Integer> right = new MyLinkedList<Integer>();
 
 	public Hanoi() {
-		 for(int i = 9; i >= 1; i--) {
+		 for(int i = 3; i >= 1; i--) {
 			 left.add(i);
 		 }
 	}
@@ -26,7 +26,40 @@ public class Hanoi<T> extends MyLinkedList<T> {
 			return;
 		}
 		
-		 if (from == 'l') {
+		StringBuilder sb = new StringBuilder();
+		sb.append(from);
+		sb.append(to);
+		
+		switch(sb.toString()) {
+		case "lm":
+			middle.add(left.getLast());
+			left.removeLast();
+			break;
+		case "lr":
+			right.add(left.getLast());
+			left.removeLast();
+			break;
+		case "ml":
+			left.add(middle.getLast());
+			middle.removeLast();
+			break;
+		case "mr":
+			right.add(middle.getLast());
+			middle.removeLast();
+			break;
+		case "rl":
+			left.add(right.getLast());
+			right.removeLast();
+			break;
+		case "rm":
+			middle.add(right.getLast());
+			right.removeLast();
+			break;
+		default:
+			System.out.println("Sie müssen zwei gültige Werte angeben");
+		}
+		
+		 /*if (from == 'l') {
 		        source = left;
 		    } 
 		 else if (from == 'm') {
@@ -92,7 +125,7 @@ public class Hanoi<T> extends MyLinkedList<T> {
 		 }
 		  else {
 		        System.out.println("Die zu bewegende Scheibe darf nicht größer sein als die auf die sie draufgelegt wird.");
-		  }
+		  }*/
 	}
 	
 	public void run() {

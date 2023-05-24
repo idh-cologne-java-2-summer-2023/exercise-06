@@ -32,7 +32,7 @@ public class Document implements Iterable<String> {
 			}
 			i++;
 		}
-		
+		System.out.println("Der Text hat eine TTR von " + (double)unique.size()/(double) i + " .");
 		return (double)unique.size()/(double) i;
 	}
 	
@@ -46,7 +46,7 @@ public class Document implements Iterable<String> {
 	
 	public static final void main(String[] args) throws IOException {
 		Document d = Document.readFromFile(new File("data/dracula.txt"));
-		System.out.println(ttr(d));
+		ttr(d);
 	}
 
 	@Override
