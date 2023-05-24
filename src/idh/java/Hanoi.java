@@ -68,7 +68,7 @@ public class Hanoi {
 				
 				case 'l': {
 					
-					if(stM.peek() < stL.peek() ) {
+					if(stM.peek() > stL.peek() ) {
 						
 						System.out.println("You cant move this way");
 						
@@ -86,7 +86,7 @@ public class Hanoi {
 			
 				case 'r': {
 					
-					if(stM.peek() < stR.peek() ) {
+					if(stM.peek() > stR.peek() ) {
 						
 						System.out.println("You cant move this way");
 						
@@ -109,7 +109,7 @@ public class Hanoi {
 				
 				case 'l': {
 					
-					if(stR.peek() < stL.peek() ) {
+					if(stR.peek() > stL.peek() ) {
 						
 						System.out.println("You cant move this way");
 						
@@ -121,7 +121,7 @@ public class Hanoi {
 				
 				case 'm': {
 					
-					if(stR.peek() < stM.peek() ) {
+					if(stR.peek() > stM.peek() ) {
 						
 						System.out.println("You cant move this way");
 						
