@@ -3,7 +3,9 @@ package idh.java;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.HashSet;
 import java.util.Iterator;
+import java.util.Set;
 import java.util.StringTokenizer;
 
 public class Document implements Iterable<String> {
@@ -29,6 +31,16 @@ public class Document implements Iterable<String> {
 
 	public void setDocumentText(String documentText) {
 		this.documentText = documentText;
+	}
+	
+	public double ttr() {
+		int tokens = 0;
+		Set<String> types = new HashSet<String>();
+		for (String token : this) {
+			types.add(token);
+			tokens++;
+		}
+		return types.size() / (double) tokens;
 	}
 	
 	public static final void main(String[] args) throws IOException {
