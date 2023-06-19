@@ -31,6 +31,21 @@ public class Document implements Iterable<String> {
 		this.documentText = documentText;
 	}
 	
+	
+    public double ttr() {
+        Set<String> wordSet = new HashSet<>();
+        int tokenCount = 0;
+
+        for (String token : this) {
+            wordSet.add(token);
+            tokenCount++;
+        }
+
+        double ttr = (double) wordSet.size() / tokenCount;
+        return ttr;
+    }
+	
+	
 	public static final void main(String[] args) throws IOException {
 		Document d = Document.readFromFile(new File("data/dracula.txt"));
 		int i = 0;
