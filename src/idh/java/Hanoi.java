@@ -1,6 +1,7 @@
 package idh.java;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Iterator;
 
@@ -28,7 +29,7 @@ public class Hanoi {
 				}
 			} catch (Exception e) {
 				System.out.println("Try again, something's not right.");
-				// e.printStackTrace();
+				e.printStackTrace();
 			} 
 		}
 	}
